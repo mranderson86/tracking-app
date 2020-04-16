@@ -1,7 +1,7 @@
 {
   "name": "react-ui-kitten",
   "version": "0.0.1",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "index.js",
   "private": true,
   "scripts": {
     "start": "expo start",
@@ -30,7 +30,7 @@
     "react-native-reanimated": "^1.7.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.0.0-beta.13",
-    "react-native-svg": "^11.0.1",
+    "react-native-svg": "9.13.3",
     "yup": "^0.28.1"
   },
   "devDependencies": {

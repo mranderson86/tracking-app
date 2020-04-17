@@ -4,7 +4,7 @@
   "expo": {
     "name": "uiKitten",
     "slug": "uikitten",
-    "platforms": ["ios", "android", "web"],
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -18,7 +18,12 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "br.mister86.uikitten",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "br.mister86.uikitten",
+      "versionCode": 1
     }
   }
 }

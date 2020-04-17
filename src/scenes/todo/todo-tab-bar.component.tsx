@@ -6,6 +6,7 @@ import {
   SafeAreaLayoutElement,
 } from '../../components/safe-area-layout.component';
 import {Toolbar} from '../../components/toolbar.component';
+import {MenuIcon} from '../../assets/icons';
 
 export const TodoTabBar = (props): SafeAreaLayoutElement => {
   const onTabSelect = (index: number): void => {
@@ -22,7 +23,11 @@ export const TodoTabBar = (props): SafeAreaLayoutElement => {
 
   return (
     <SafeAreaLayout insets={SaveAreaInset.TOP}>
-      <Toolbar title="React Navigation Ex 🐱" />
+      <Toolbar
+        title="React Navigation Ex 🐱"
+        backIcon={MenuIcon}
+        onBackPress={props.navigation.toggleDrawer}
+      />
       <TabBar selectedIndex={props.state.index} onSelect={onTabSelect}>
         {props.state.routes.map(createNavigationTabForRoute)}
       </TabBar>

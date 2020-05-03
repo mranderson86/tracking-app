@@ -10,4 +10,5 @@ export enum AppRoute {
   TODO_DETAILS = 'ToDo Details',
   PROFILE = 'Profile',
   ABOUT = 'About',
+  LOGOUT = 'Logout',
 }

@@ -5,7 +5,13 @@ import {TodoNavigator} from './todo.navigator';
 import {ProfileNavigator} from './profile.navigator';
 import {AppRoute} from './app-routes';
 import {HomeTabBar, HomeDrawer, AboutScreen} from '../scenes/home';
-import {HomeIcon, InfoIcon, LayoutIcon, PersonIcon} from '../assets/icons';
+import {
+  HomeIcon,
+  InfoIcon,
+  LayoutIcon,
+  PersonIcon,
+  LogoutIcon,
+} from '../assets/icons';
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -25,6 +31,8 @@ const HomeBottomNavigator = (): React.ReactElement => (
   </BottomTab.Navigator>
 );
 
+const LogoutScreen = (): React.ReactElement => <React.Fragment />;
+
 export const HomeNavigator = (): React.ReactElement => (
   <Drawer.Navigator drawerContent={props => <HomeDrawer {...props} />}>
     <Drawer.Screen
@@ -36,6 +44,11 @@ export const HomeNavigator = (): React.ReactElement => (
       name={AppRoute.ABOUT}
       component={AboutScreen}
       options={{title: 'About', drawerIcon: InfoIcon}}
+    />
+    <Drawer.Screen
+      name={AppRoute.LOGOUT}
+      component={LogoutScreen}
+      options={{title: 'Logout', drawerIcon: LogoutIcon}}
     />
   </Drawer.Navigator>
 );

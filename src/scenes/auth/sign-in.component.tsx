@@ -1,100 +1,129 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
-import { Button, CheckBox, Layout, LayoutElement } from '@ui-kitten/components';
-import { Formik, FormikProps } from 'formik';
-import { SignInScreenProps } from '../../navigation/auth.navigator';
-import { AppRoute } from '../../navigation/app-routes';
-import { FormInput } from '../../components/form-input.component';
-import { EyeIcon, EyeOffIcon } from '../../assets/icons';
-import { SignInData, SignInSchema } from '../../data/sign-in.model';
+import {ImageBackground, StyleSheet, View} from 'react-native';
+import {Button, CheckBox, Layout, LayoutElement} from '@ui-kitten/components';
+import {Formik, FormikProps} from 'formik';
+import {SignInScreenProps} from '../../navigation/auth.navigator';
+import {AppRoute} from '../../navigation/app-routes';
+import {FormInput} from '../../components/form-input.component';
+import {EyeIcon, EyeOffIcon} from '../../assets/icons';
+import {SignInData, SignInSchema} from '../../data/sign-in.model';
 
-export const SignInScreen = (props: SignInScreenProps): LayoutElement => {
+import {connect} from 'react-redux';
+import {ApplicationState} from '../../store';
+import {AuthenticationTypes} from '../../store/ducks/authentication/types';
 
-  const [shouldRemember, setShouldRemember] = React.useState<boolean>(false);
-  const [passwordVisible, setPasswordVisible] = React.useState<boolean>(false);
+// Integrando State em Props
+const mapStateToProps = ({Authentication}: ApplicationState) => ({
+  Authentication,
+});
 
-  const onFormSubmit = (values: SignInData): void => {
-    navigateHome();
-  };
+type StateProps = ReturnType<typeof mapStateToProps>;
 
-  const navigateHome = (): void => {
-    props.navigation.navigate(AppRoute.HOME);
-  };
-
-  const navigateSignUp = (): void => {
-    props.navigation.navigate(AppRoute.SIGN_UP);
-  };
-
-  const navigateResetPassword = (): void => {
-    props.navigation.navigate(AppRoute.RESET_PASSWORD);
-  };
-
-  const onPasswordIconPress = (): void => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const renderForm = (props: FormikProps<SignInData>): React.ReactFragment => (
-    <React.Fragment>
-      <FormInput
-        id='email'
-        style={styles.formControl}
-        placeholder='Email'
-        keyboardType='email-address'
-      />
-      <FormInput
-        id='password'
-        style={styles.formControl}
-        placeholder='Password'
-        secureTextEntry={!passwordVisible}
-        icon={passwordVisible ? EyeIcon : EyeOffIcon}
-        onIconPress={onPasswordIconPress}
-      />
-      <View style={styles.resetPasswordContainer}>
-        <CheckBox
-          style={styles.formControl}
-          checked={shouldRemember}
-          onChange={setShouldRemember}
-          text='Remember Me'
-        />
-        <Button
-          appearance='ghost'
-          status='basic'
-          onPress={navigateResetPassword}>
-          Forgot password?
-        </Button>
-      </View>
-      <Button
-        style={styles.submitButton}
-        onPress={props.handleSubmit}>
-        SIGN IN
-      </Button>
-    </React.Fragment>
-  );
-
-  return (
-    <React.Fragment>
-      <ImageBackground
-        style={styles.appBar}
-        source={require('../../assets/image-background.jpeg')}
-      />
-      <Layout style={styles.formContainer}>
-        <Formik
-          initialValues={SignInData.empty()}
-          validationSchema={SignInSchema}
-          onSubmit={onFormSubmit}>
-          {renderForm}
-        </Formik>
-        <Button
-          style={styles.noAccountButton}
-          appearance='ghost'
-          status='basic'
-          onPress={navigateSignUp}>
-          Don't have an account?
-        </Button>
-      </Layout>
-    </React.Fragment>
-  );
+const mapDispatchToProps = {
+  loadRequest: (user: SignInData) => ({
+    type: AuthenticationTypes.LOGIN_REQUEST,
+    payload: user,
+  }),
 };
+
+type DispatchProps = typeof mapDispatchToProps;
+
+type Props = StateProps & DispatchProps & SignInScreenProps;
+
+export const SignInScreen = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(
+  (props: Props): LayoutElement => {
+    const [shouldRemember, setShouldRemember] = React.useState<boolean>(false);
+    const [passwordVisible, setPasswordVisible] = React.useState<boolean>(
+      false,
+    );
+
+    const onFormSubmit = (values: SignInData): void => {
+      //navigateHome();
+      props.loadRequest(values);
+    };
+
+    const navigateHome = (): void => {
+      props.navigation.navigate(AppRoute.HOME);
+    };
+
+    const navigateSignUp = (): void => {
+      props.navigation.navigate(AppRoute.SIGN_UP);
+    };
+
+    const navigateResetPassword = (): void => {
+      props.navigation.navigate(AppRoute.RESET_PASSWORD);
+    };
+
+    const onPasswordIconPress = (): void => {
+      setPasswordVisible(!passwordVisible);
+    };
+
+    const renderForm = (
+      props: FormikProps<SignInData>,
+    ): React.ReactFragment => (
+      <React.Fragment>
+        <FormInput
+          id="email"
+          style={styles.formControl}
+          placeholder="Email"
+          keyboardType="email-address"
+        />
+        <FormInput
+          id="password"
+          style={styles.formControl}
+          placeholder="Password"
+          secureTextEntry={!passwordVisible}
+          icon={passwordVisible ? EyeIcon : EyeOffIcon}
+          onIconPress={onPasswordIconPress}
+        />
+        <View style={styles.resetPasswordContainer}>
+          <CheckBox
+            style={styles.formControl}
+            checked={shouldRemember}
+            onChange={setShouldRemember}
+            text="Remember Me"
+          />
+          <Button
+            appearance="ghost"
+            status="basic"
+            onPress={navigateResetPassword}>
+            Forgot password?
+          </Button>
+        </View>
+        <Button style={styles.submitButton} onPress={props.handleSubmit}>
+          SIGN IN
+        </Button>
+      </React.Fragment>
+    );
+
+    return (
+      <React.Fragment>
+        <ImageBackground
+          style={styles.appBar}
+          source={require('../../assets/image-background.jpeg')}
+        />
+        <Layout style={styles.formContainer}>
+          <Formik
+            initialValues={SignInData.empty()}
+            validationSchema={SignInSchema}
+            onSubmit={onFormSubmit}>
+            {renderForm}
+          </Formik>
+          <Button
+            style={styles.noAccountButton}
+            appearance="ghost"
+            status="basic"
+            onPress={navigateSignUp}>
+            Don't have an account?
+          </Button>
+        </Layout>
+      </React.Fragment>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   appBar: {

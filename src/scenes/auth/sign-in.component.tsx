@@ -10,7 +10,7 @@ import {SignInData, SignInSchema} from '../../data/sign-in.model';
 
 import {connect} from 'react-redux';
 import {ApplicationState} from '../../store';
-import {AuthenticationTypes} from '../../store/ducks/authentication/types';
+import {LoginTypes} from '../../store/ducks/authentication/types';
 
 // Integrando State em Props
 const mapStateToProps = ({Authentication}: ApplicationState) => ({
@@ -21,11 +21,13 @@ type StateProps = ReturnType<typeof mapStateToProps>;
 
 const mapDispatchToProps = {
   loadRequest: (user: SignInData) => ({
-    type: AuthenticationTypes.LOGIN_REQUEST,
+    type: LoginTypes.LOGIN_REQUEST,
     payload: user,
   }),
 };
-
+/**
+ * Redux Action Login Request
+ */
 type DispatchProps = typeof mapDispatchToProps;
 
 type Props = StateProps & DispatchProps & SignInScreenProps;
@@ -41,7 +43,8 @@ export const SignInScreen = connect(
     );
 
     const onFormSubmit = (values: SignInData): void => {
-      //navigateHome();
+      console.log(values);
+
       props.loadRequest(values);
     };
 

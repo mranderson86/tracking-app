@@ -1,21 +1,26 @@
 import {action} from 'typesafe-actions';
-import {AuthenticationTypes, Login} from './types';
+import {LoginTypes, LogoutTypes} from './types';
 
 import {SignInData} from '../../../data/sign-in.model';
 
 /**
  * Action Request Login
  */
-export const loginRequest = (data: SignInData) =>
-  action(AuthenticationTypes.LOGIN_REQUEST, {data});
+export const loginRequest = (user: SignInData) =>
+  action(LoginTypes.LOGIN_REQUEST, {user});
 
 /**
  * Action Success Login
  */
 export const loginSuccess = (token: String) =>
-  action(AuthenticationTypes.LOGIN_SUCCESS, {token});
+  action(LoginTypes.LOGIN_SUCCESS, {token});
 
 /**
  * Action Failure Login
  */
-export const loginFailure = () => action(AuthenticationTypes.LOGIN_FAILURE);
+export const loginFailure = () => action(LoginTypes.LOGIN_FAILURE);
+
+/**
+ * Action Request Logout
+ */
+export const logoutRequest = () => action(LogoutTypes.LOGOUT_REQUEST);

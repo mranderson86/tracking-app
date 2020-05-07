@@ -1,10 +1,16 @@
 import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import {TodoNavigator} from './todo.navigator';
 import {ProfileNavigator} from './profile.navigator';
 import {AppRoute} from './app-routes';
-import {HomeTabBar, HomeDrawer, AboutScreen} from '../scenes/home';
+import {
+  HomeTabBar,
+  HomeDrawer,
+  AboutScreen,
+  LogoutScreen,
+} from '../scenes/home';
 import {
   HomeIcon,
   InfoIcon,
@@ -30,8 +36,6 @@ const HomeBottomNavigator = (): React.ReactElement => (
     />
   </BottomTab.Navigator>
 );
-
-const LogoutScreen = (): React.ReactElement => <React.Fragment />;
 
 export const HomeNavigator = (): React.ReactElement => (
   <Drawer.Navigator drawerContent={props => <HomeDrawer {...props} />}>

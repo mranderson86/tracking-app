@@ -1,7 +1,7 @@
 import {call, put, takeLatest} from 'redux-saga/effects';
 
 import {loginSuccess, loginFailure} from './actions';
-import {AuthenticationTypes} from './types';
+import {LoginTypes} from './types';
 import {api} from '../../../services/api';
 
 function* loginRequestAsync({payload}: any) {
@@ -10,12 +10,11 @@ function* loginRequestAsync({payload}: any) {
     // Requisita api de autenticação
     const response = yield call(api.post, 'sessions', {email, password});
     const {token} = response.data;
-
     // Autenticado com sucesso
     // Atualiza o token
     yield put(loginSuccess(token));
   } catch (error) {
-    console.log('new error => ', error);
+    console.log('LoginRequest => ', error);
 
     yield put(loginFailure());
   }
@@ -24,5 +23,5 @@ function* loginRequestAsync({payload}: any) {
 // Generator: Watch Login Request
 export function* watchLoginRequest() {
   // Take Last Action
-  yield takeLatest(AuthenticationTypes.LOGIN_REQUEST, loginRequestAsync);
+  yield takeLatest(LoginTypes.LOGIN_REQUEST, loginRequestAsync);
 }

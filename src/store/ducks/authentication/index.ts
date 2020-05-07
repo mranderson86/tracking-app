@@ -1,5 +1,5 @@
 import {Reducer} from 'redux';
-import {AuthenticationState, AuthenticationTypes} from './types';
+import {AuthenticationState, LoginTypes, LogoutTypes} from './types';
 
 /**
  * Estado inicial de autenticação do usuário
@@ -16,9 +16,9 @@ const reducer: Reducer<AuthenticationState> = (
   action,
 ) => {
   switch (action.type) {
-    case AuthenticationTypes.LOGIN_REQUEST:
+    case LoginTypes.LOGIN_REQUEST:
       return {...state, error: false, loading: true};
-    case AuthenticationTypes.LOGIN_SUCCESS:
+    case LoginTypes.LOGIN_SUCCESS:
       const {token} = action.payload;
 
       return {
@@ -28,12 +28,20 @@ const reducer: Reducer<AuthenticationState> = (
         error: false,
         token,
       };
-    case AuthenticationTypes.LOGIN_FAILURE:
+    case LoginTypes.LOGIN_FAILURE:
       return {
         ...state,
         isLogged: false,
         loading: false,
         error: true,
+        token: '',
+      };
+    case LogoutTypes.LOGOUT_REQUEST:
+      return {
+        ...state,
+        isLogged: false,
+        loading: false,
+        error: false,
         token: '',
       };
     default:

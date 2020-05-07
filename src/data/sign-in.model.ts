@@ -9,6 +9,10 @@ export class SignInData {
 }
 
 export const SignInSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email'),
-  password: Yup.string().min(3, 'Password must be at least 3 characters'),
+  email: Yup.string()
+    .email('Invalid email')
+    .required(),
+  password: Yup.string()
+    .min(3, 'Password must be at least 3 characters')
+    .required(),
 });

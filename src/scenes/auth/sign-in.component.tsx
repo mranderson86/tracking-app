@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {Button, CheckBox, Layout, LayoutElement} from '@ui-kitten/components';
-import {Formik, FormikProps} from 'formik';
+import {Formik, FormikProps, FormikHelpers, FormikErrors} from 'formik';
 import {SignInScreenProps} from '../../navigation/auth.navigator';
 import {AppRoute} from '../../navigation/app-routes';
 import {FormInput} from '../../components/form-input.component';
@@ -42,9 +42,13 @@ export const SignInScreen = connect(
       false,
     );
 
-    const onFormSubmit = (values: SignInData): void => {
-      console.log(values);
-
+    const onFormSubmit = (
+      values: SignInData,
+      formikHelpers: FormikHelpers<SignInData>,
+    ): void => {
+      // !values.email && formikHelpers.setFieldError('email', 'E-mail is empty');
+      //!values.password &&
+      //  formikHelpers.setFieldError('password', 'Password is empty');
       props.loadRequest(values);
     };
 

@@ -8,11 +8,18 @@ import {
 import {Toolbar} from '../../components/toolbar.component';
 import {MenuIcon} from '../../assets/icons';
 
+/**
+ * Navega para tela ao clicar em cada aba
+ */
 export const TodoTabBar = (props): SafeAreaLayoutElement => {
   const onTabSelect = (index: number): void => {
     const selectedTabRoute: string = props.state.routeNames[index];
     props.navigation.navigate(selectedTabRoute);
   };
+
+  /**
+   * Cria aba no topo da tela
+   *  */
 
   const createNavigationTabForRoute = (route): TabElement => {
     const {options} = props.descriptors[route.key];
@@ -24,7 +31,7 @@ export const TodoTabBar = (props): SafeAreaLayoutElement => {
   return (
     <SafeAreaLayout insets={SaveAreaInset.TOP}>
       <Toolbar
-        title="React Navigation Ex 🐱"
+        title="Tracking de Tecnologia"
         backIcon={MenuIcon}
         onBackPress={props.navigation.toggleDrawer}
       />

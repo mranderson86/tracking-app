@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Layout, LayoutElement, Text } from '@ui-kitten/components';
+import {StyleSheet} from 'react-native';
+import {Layout, LayoutElement, Text} from '@ui-kitten/components';
 
 export const WelcomeScreen = (props): LayoutElement => (
   <Layout style={styles.container}>
-    <Text style={styles.text} category='h1'>
-      Welcome to React Navigation 5 Guide
+    <Text style={styles.text} category="h1">
+      Tracking de Tecnologia
     </Text>
   </Layout>
 );

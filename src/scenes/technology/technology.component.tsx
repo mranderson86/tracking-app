@@ -1,7 +1,7 @@
 import React from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {
-  Input,
+  CheckBox,
   Layout,
   List,
   ListElement,
@@ -13,8 +13,6 @@ import {
 } from '@ui-kitten/components';
 import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
 import {AppRoute} from '../../navigation/app-routes';
-import {ProgressBar} from '../../components/progress-bar.component';
-import {SearchIcon} from '../../assets/icons';
 import {Todo} from '../../data/todo.model';
 
 const allTodos: Todo[] = [
@@ -29,7 +27,7 @@ const allTodos: Todo[] = [
   Todo.mocked2(),
 ];
 
-const TodoInProgressScreenComponent = (
+const TechnologyScreenComponent = (
   props: TodoInProgressScreenProps & ThemedComponentProps,
 ): ListElement => {
   const [todos, setTodos] = React.useState<Todo[]>(allTodos);
@@ -51,40 +49,31 @@ const TodoInProgressScreenComponent = (
     props.navigation.navigate(AppRoute.TODO_DETAILS, {todo});
   };
 
-  const renderTodo = ({item}: ListRenderItemInfo<Todo>): ListItemElement => (
-    <ListItem style={props.themedStyle.item} onPress={navigateTodoDetails}>
-      <Text category="s1">{item.title}</Text>
-      <Text appearance="hint" category="c1">
-        {item.description}
-      </Text>
-      <ProgressBar
-        style={props.themedStyle.itemProgressBar}
-        progress={item.progress}
-        text={`${item.progress}%`}
-      />
+  /**
+   * Renderiza cada item da lista de tecnologia
+   * @param item
+   */
+  const renderTechnology = ({
+    item,
+  }: ListRenderItemInfo<Todo>): ListItemElement => (
+    <ListItem style={props.themedStyle.item}>
+      <CheckBox text={item.title} />
     </ListItem>
   );
 
   return (
     <Layout style={props.themedStyle.container}>
-      <Input
-        style={props.themedStyle.filterInput}
-        placeholder="Search"
-        value={query}
-        icon={SearchIcon}
-        onChangeText={onChangeQuery}
-      />
       <List
         style={props.themedStyle.list}
         data={todos}
-        renderItem={renderTodo}
+        renderItem={renderTechnology}
       />
     </Layout>
   );
 };
 
-export const TodoInProgressScreen = withStyles(
-  TodoInProgressScreenComponent,
+export const TechnologyScreen = withStyles(
+  TechnologyScreenComponent,
   theme => ({
     container: {
       flex: 1,
@@ -98,9 +87,9 @@ export const TodoInProgressScreen = withStyles(
       backgroundColor: theme['background-basic-color-1'],
     },
     item: {
-      flexDirection: 'column',
-      alignItems: 'flex-start',
+      flexDirection: 'row',
       paddingHorizontal: 12,
+      marginHorizontal: 10,
     },
     itemProgressBar: {
       width: '50%',

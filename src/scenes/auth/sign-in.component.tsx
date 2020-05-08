@@ -37,7 +37,6 @@ export const SignInScreen = connect(
   mapDispatchToProps,
 )(
   (props: Props): LayoutElement => {
-    const [shouldRemember, setShouldRemember] = React.useState<boolean>(false);
     const [passwordVisible, setPasswordVisible] = React.useState<boolean>(
       false,
     );
@@ -86,20 +85,6 @@ export const SignInScreen = connect(
           icon={passwordVisible ? EyeIcon : EyeOffIcon}
           onIconPress={onPasswordIconPress}
         />
-        <View style={styles.resetPasswordContainer}>
-          <CheckBox
-            style={styles.formControl}
-            checked={shouldRemember}
-            onChange={setShouldRemember}
-            text="Remember Me"
-          />
-          <Button
-            appearance="ghost"
-            status="basic"
-            onPress={navigateResetPassword}>
-            Forgot password?
-          </Button>
-        </View>
         <Button style={styles.submitButton} onPress={props.handleSubmit}>
           SIGN IN
         </Button>

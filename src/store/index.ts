@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import {AuthenticationState} from './ducks/authentication/types';
 import {ProfileState} from './ducks/register/types';
+import {TechnologyState} from './ducks/technology/types';
 
 import rootReducer from './ducks/rootReducer';
 import rootSaga from './ducks/rootSaga';
@@ -10,6 +11,7 @@ import rootSaga from './ducks/rootSaga';
 export interface ApplicationState {
   Authentication: AuthenticationState;
   Register: ProfileState;
+  Technology: TechnologyState;
 }
 
 const sagaMiddleware = createSagaMiddleware();

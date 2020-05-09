@@ -1,6 +1,7 @@
 import React from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {
+  Button,
   CheckBox,
   Layout,
   List,
@@ -12,26 +13,15 @@ import {
 } from '@ui-kitten/components';
 
 import {AppRoute} from '../../navigation/app-routes';
-import {Todo} from '../../data/todo.model';
 
 import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
 
 import {ApplicationState} from '../../store';
 import {TechnologyTypes, Technology} from '../../store/ducks/technology/types';
+import {DoneAllIcon} from '../../assets/icons';
 
 import {connect} from 'react-redux';
-
-const allTodos: Todo[] = [
-  Todo.mocked0(),
-  Todo.mocked1(),
-  Todo.mocked2(),
-  Todo.mocked0(),
-  Todo.mocked1(),
-  Todo.mocked2(),
-  Todo.mocked0(),
-  Todo.mocked1(),
-  Todo.mocked2(),
-];
+import {boolean} from 'yup';
 
 // Integrando State em Props
 const mapStateToProps = ({Technology, Authentication}: ApplicationState) => ({
@@ -47,9 +37,14 @@ const mapDispatchToProps = {
     payload: token,
   }),
 
-  technologyChecking: (technology: Technology, checked: boolean) => ({
+  technologyChecked: (technology: Technology) => ({
     type: TechnologyTypes.TECHNOLOGY_CHECKED,
     payload: {technology},
+  }),
+
+  technologySave: (technologies: Technology[], token: string) => ({
+    type: TechnologyTypes.TECHNOLOGY_SAVE,
+    payload: {technologies, token},
   }),
 };
 /**
@@ -71,8 +66,17 @@ const TechnologyScreenComponent = connect(
     const {token} = props.Authentication;
 
     React.useEffect(() => {
+      // Consulta todas as tecnologias
       props.technologyRequest(token);
     }, []);
+
+    // Renderiza o botão FAB se houver tecnologias marcadas
+    const showRenderFab = (): boolean => {
+      const selected: [] = technologies.filter(
+        (item: Technology) => item.checked,
+      );
+      return selected.length > 0;
+    };
 
     /**
      * Renderiza cada item da lista de tecnologia
@@ -85,7 +89,7 @@ const TechnologyScreenComponent = connect(
         <CheckBox
           text={item.technology}
           checked={item.checked}
-          onChange={checked => props.technologyChecking({...item, checked})}
+          onChange={checked => props.technologyChecked({...item, checked})}
         />
       </ListItem>
     );
@@ -97,6 +101,13 @@ const TechnologyScreenComponent = connect(
           data={technologies}
           renderItem={renderTechnology}
         />
+        {showRenderFab() && (
+          <Button
+            style={props.themedStyle.fab}
+            icon={DoneAllIcon}
+            onPress={() => props.technologySave(technologies, token)}
+          />
+        )}
       </Layout>
     );
   },
@@ -124,6 +135,15 @@ export const TechnologyScreen = withStyles(
     itemProgressBar: {
       width: '50%',
       marginVertical: 12,
+    },
+    fab: {
+      position: 'absolute',
+      margin: 20,
+      right: 0,
+      bottom: 0,
+      borderRadius: 50,
+      width: 70,
+      height: 70,
     },
   }),
 );

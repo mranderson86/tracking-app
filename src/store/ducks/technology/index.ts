@@ -40,6 +40,10 @@ const reducer: Reducer<TechnologyState> = (state = INITIAL_STATE, action) => {
       };
     }
 
+    case TechnologyTypes.TECHNOLOGY_SAVE: {
+      return {...state, loading: true};
+    }
+
     default:
       return state;
   }

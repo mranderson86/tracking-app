@@ -1,15 +1,19 @@
 import {put, call, takeLatest} from 'redux-saga/effects';
 
-import {technologySuccess, technologyFailure} from './actions';
-import {TechnologyTypes} from './types';
+import {
+  technologyRequest,
+  technologySuccess,
+  technologyFailure,
+} from './actions';
+import {TechnologyTypes, Technology} from './types';
 import {api} from '../../../services/api';
 
 function* TechnologiesRequestAsync({payload}: any) {
   try {
-    console.log('Request Technologies', payload);
+    console.log(payload);
 
     const token = payload;
-    const response = yield call(api.get, 'technologies', {
+    const response = yield call(api.get, 'technologies/available', {
       headers: {authorization: `Bearer ${token}`},
     });
 
@@ -28,4 +32,35 @@ export function* watchTechnologiesRequest() {
     TechnologyTypes.TECHNOLOGY_REQUEST,
     TechnologiesRequestAsync,
   );
+}
+
+/***
+ * Send Technologies marked for api server
+ */
+function* TechnologiesSaveAsync({payload}: any) {
+  try {
+    const {token, technologies} = payload;
+
+    const technologiesSelected = technologies.filter(
+      ({checked}: Technology) => checked === true,
+    );
+
+    let response = yield call(api.post, 'checkins', technologiesSelected, {
+      headers: {authorization: `Bearer ${token}`},
+    });
+
+    if (response.data) {
+      console.log(token);
+
+      yield put({type: TechnologyTypes.TECHNOLOGY_REQUEST, payload: token});
+    }
+  } catch (error) {
+    console.log(error);
+
+    yield put(technologyFailure());
+  }
+}
+
+export function* watchTechnologiesSave() {
+  yield takeLatest(TechnologyTypes.TECHNOLOGY_SAVE, TechnologiesSaveAsync);
 }

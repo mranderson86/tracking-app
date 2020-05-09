@@ -20,5 +20,12 @@ export const technologyFailure = () =>
 /**
  * Change check value of technology
  */
-export const technologyChecking = (technology: Technology) =>
+export const technologyChecked = (technology: Technology) =>
   action(TechnologyTypes.TECHNOLOGY_CHECKED, {technology});
+
+/**
+ * Send technologies for api save
+ * @param technologies
+ */
+export const technologySave = (technologies: Technology[], token: string) =>
+  action(TechnologyTypes.TECHNOLOGY_SAVE, {technologies});

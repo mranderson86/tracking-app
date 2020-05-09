@@ -6,6 +6,7 @@ export enum TechnologyTypes {
   TECHNOLOGY_SUCCESS = '@technology/SUCCESS',
   TECHNOLOGY_FAILURE = '@technology/FAILURE',
   TECHNOLOGY_CHECKED = '@technology/CHECKED',
+  TECHNOLOGY_SAVE = '@technology/SAVE',
 }
 
 /**

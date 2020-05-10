@@ -15,7 +15,7 @@ export const ProfileScreen = (
 ): SafeAreaLayoutElement => (
   <SafeAreaLayout style={styles.safeArea} insets={SaveAreaInset.TOP}>
     <Toolbar
-      title="Tracking de Tecnologias"
+      title="Tracking of Technology"
       backIcon={MenuIcon}
       onBackPress={props.navigation.toggleDrawer}
     />

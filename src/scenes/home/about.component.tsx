@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { Divider, Layout, Text } from '@ui-kitten/components';
-import { AboutScreenProps } from '../../navigation/home.navigator';
-import { Toolbar } from '../../components/toolbar.component';
+import {StyleSheet} from 'react-native';
+import {Divider, Layout, Text} from '@ui-kitten/components';
+import {AboutScreenProps} from '../../navigation/home.navigator';
+import {Toolbar} from '../../components/toolbar.component';
 import {
   SafeAreaLayout,
   SafeAreaLayoutElement,
@@ -10,18 +10,14 @@ import {
 } from '../../components/safe-area-layout.component';
 
 export const AboutScreen = (props: AboutScreenProps): SafeAreaLayoutElement => (
-  <SafeAreaLayout
-    style={styles.safeArea}
-    insets={SaveAreaInset.TOP}>
+  <SafeAreaLayout style={styles.safeArea} insets={SaveAreaInset.TOP}>
     <Toolbar
-      title='React Navigation Ex 🐱'
+      title="Tracking of Technology"
       onBackPress={props.navigation.goBack}
     />
-    <Divider/>
+    <Divider />
     <Layout style={styles.container}>
-      <Text category='h1'>
-        ABOUT
-      </Text>
+      <Text category="h1">ABOUT</Text>
     </Layout>
   </SafeAreaLayout>
 );

@@ -1,17 +1,11 @@
 import {put, call, takeLatest} from 'redux-saga/effects';
 
-import {
-  technologyRequest,
-  technologySuccess,
-  technologyFailure,
-} from './actions';
+import {technologySuccess, technologyFailure} from './actions';
 import {TechnologyTypes, Technology} from './types';
 import {api} from '../../../services/api';
 
 function* TechnologiesRequestAsync({payload}: any) {
   try {
-    console.log(payload);
-
     const token = payload;
     const response = yield call(api.get, 'technologies/available', {
       headers: {authorization: `Bearer ${token}`},
@@ -50,8 +44,6 @@ function* TechnologiesSaveAsync({payload}: any) {
     });
 
     if (response.data) {
-      console.log(token);
-
       yield put({type: TechnologyTypes.TECHNOLOGY_REQUEST, payload: token});
     }
   } catch (error) {

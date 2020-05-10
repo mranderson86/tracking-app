@@ -27,7 +27,7 @@ const HomeBottomNavigator = (): React.ReactElement => (
     <BottomTab.Screen
       name={AppRoute.TODO}
       component={TodoNavigator}
-      options={{title: 'TODO', tabBarIcon: LayoutIcon}}
+      options={{title: 'TECHNOLOGY', tabBarIcon: LayoutIcon}}
     />
     <BottomTab.Screen
       name={AppRoute.PROFILE}

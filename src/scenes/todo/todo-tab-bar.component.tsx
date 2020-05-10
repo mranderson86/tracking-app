@@ -31,7 +31,7 @@ export const TodoTabBar = (props): SafeAreaLayoutElement => {
   return (
     <SafeAreaLayout insets={SaveAreaInset.TOP}>
       <Toolbar
-        title="Tracking de Tecnologia"
+        title="Tracking of Technology"
         backIcon={MenuIcon}
         onBackPress={props.navigation.toggleDrawer}
       />

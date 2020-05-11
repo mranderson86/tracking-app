@@ -8,7 +8,7 @@ import {
   UserTechnologyScreen,
   TechnologyUserScreen,
 } from '../scenes/technology';
-import {DoneAllIcon, GridIcon} from '../assets/icons';
+import {DoneAllIcon, CodeOutlineIcon, PeopleOutlineIcon} from '../assets/icons';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -22,12 +22,12 @@ export const TodoNavigator = (): React.ReactElement => (
     <TopTab.Screen
       name={AppRoute.USERS_TECHNOLOGY}
       component={UserTechnologyScreen}
-      options={{title: 'TECHNOLOGY', tabBarIcon: GridIcon}}
+      options={{title: 'TECHNOLOGY', tabBarIcon: CodeOutlineIcon}}
     />
     <TopTab.Screen
       name={AppRoute.TECHNOLOGIES_USER}
       component={TechnologyUserScreen}
-      options={{title: 'USERS', tabBarIcon: GridIcon}}
+      options={{title: 'USERS', tabBarIcon: PeopleOutlineIcon}}
     />
   </TopTab.Navigator>
 );

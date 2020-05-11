@@ -1,6 +1,7 @@
 import React from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {
+  Text,
   Button,
   CheckBox,
   Layout,
@@ -12,8 +13,6 @@ import {
   withStyles,
 } from '@ui-kitten/components';
 
-import {AppRoute} from '../../navigation/app-routes';
-
 import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
 
 import {ApplicationState} from '../../store';
@@ -21,7 +20,6 @@ import {TechnologyTypes, Technology} from '../../store/ducks/technology/types';
 import {DoneAllIcon} from '../../assets/icons';
 
 import {connect} from 'react-redux';
-import {boolean} from 'yup';
 
 // Integrando State em Props
 const mapStateToProps = ({Technology, Authentication}: ApplicationState) => ({
@@ -87,15 +85,24 @@ const TechnologyScreenComponent = connect(
     }: ListRenderItemInfo<Technology>): ListItemElement => (
       <ListItem style={props.themedStyle.item}>
         <CheckBox
-          text={item.technology}
+          style={props.themedStyle.checkbox}
           checked={item.checked}
-          onChange={checked => props.technologyChecked({...item, checked})}
+          onChange={(checked: boolean) =>
+            props.technologyChecked({...item, checked})
+          }
         />
+        <Text category="h6">{item.technology}</Text>
       </ListItem>
     );
 
     return (
       <Layout style={props.themedStyle.container}>
+        <Text
+          appearance="hint"
+          style={[props.themedStyle.title, props.themedStyle.item]}
+          category="h6">
+          Choose your technology below
+        </Text>
         <List
           style={props.themedStyle.list}
           data={technologies}
@@ -129,6 +136,8 @@ export const TechnologyScreen = withStyles(
     },
     item: {
       flexDirection: 'row',
+      // justifyContent: 'space-between',
+      // alignItems: 'center',
       paddingHorizontal: 12,
       marginHorizontal: 12,
     },
@@ -144,6 +153,10 @@ export const TechnologyScreen = withStyles(
       borderRadius: 50,
       width: 70,
       height: 70,
+    },
+    checkbox: {marginRight: 20},
+    title: {
+      marginTop: 10,
     },
   }),
 );

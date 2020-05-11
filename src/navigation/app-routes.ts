@@ -14,4 +14,5 @@ export enum AppRoute {
   TECHNOLOGY = 'Technology',
   USERS_TECHNOLOGY = 'Users Technology',
   TECHNOLOGIES_USER = 'Technologies User',
+  TECHNOLOGIES_USER_DETAIL = 'Technology User Detail',
 }

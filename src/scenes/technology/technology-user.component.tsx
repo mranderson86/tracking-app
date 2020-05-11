@@ -19,6 +19,7 @@ import {ApplicationState} from '../../store';
 import {
   TechnologiesUserTypes,
   TechnologiesUser,
+  Technology,
 } from '../../store/ducks/technologies-user/types';
 
 import {connect} from 'react-redux';
@@ -69,21 +70,46 @@ const TechnologyUserScreenComponent = connect(
      */
     const renderTechnology = ({
       item,
+    }: ListRenderItemInfo<Technology>): ListItemElement => (
+      <ListItem style={props.themedStyle.item}>
+        <Text appearance="hint" category="s2">
+          {item.technology}
+        </Text>
+      </ListItem>
+    );
+
+    /**
+     * Renderiza cada item da lista de tecnologia
+     * @param item
+     */
+    const renderUser = ({
+      item,
     }: ListRenderItemInfo<TechnologiesUser>): ListItemElement => (
       <ListItem style={props.themedStyle.item}>
-        <Text category="s1">{item.username}</Text>
-        <Text appearance="hint" category="c1">
+        <Text category="h6">{item.username}</Text>
+        <Text appearance="hint" category="s1">
           {item.technologies.length.toString()} Technologies
         </Text>
+        <List
+          style={props.themedStyle.list}
+          data={item.technologies}
+          renderItem={renderTechnology}
+        />
       </ListItem>
     );
 
     return (
       <Layout style={props.themedStyle.container}>
+        <Text
+          appearance="hint"
+          style={[props.themedStyle.title, props.themedStyle.item]}
+          category="h6">
+          Technologies for every user today
+        </Text>
         <List
           style={props.themedStyle.list}
           data={technologiesUser}
-          renderItem={renderTechnology}
+          renderItem={renderUser}
         />
       </Layout>
     );
@@ -122,6 +148,9 @@ export const TechnologyUserScreen = withStyles(
       borderRadius: 50,
       width: 70,
       height: 70,
+    },
+    title: {
+      marginTop: 10,
     },
   }),
 );

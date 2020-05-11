@@ -17,7 +17,10 @@ export const AboutScreen = (props: AboutScreenProps): SafeAreaLayoutElement => (
     />
     <Divider />
     <Layout style={styles.container}>
-      <Text category="h1">ABOUT</Text>
+      <Text category="h3">Tracking of Technology</Text>
+      <Text category="h5">Version 1.0</Text>
+      <Text category="h6">Development by Anderson Gomes</Text>
+      <Text category="h6">mr.anderson.brito@gmail.com</Text>
     </Layout>
   </SafeAreaLayout>
 );
@@ -28,7 +31,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
+    margin: 10,
+    //justifyContent: 'center',
     alignItems: 'center',
   },
 });

@@ -11,14 +11,13 @@ import {
   withStyles,
 } from '@ui-kitten/components';
 
-import {AppRoute} from '../../navigation/app-routes';
-
 import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
 
 import {ApplicationState} from '../../store';
 import {
   UsersTechnologyTypes,
   UsersTechnology,
+  User,
 } from '../../store/ducks/users-technology/types';
 
 import {connect} from 'react-redux';
@@ -66,6 +65,19 @@ const UserTechnologyScreenComponent = connect(
     }, []);
 
     /**
+     * Renderiza cada item da lista de usuário
+     * @param item
+     */
+    const renderUser = ({item}: ListRenderItemInfo<User>): ListItemElement => (
+      <ListItem style={props.themedStyle.item}>
+        <Text category="h6">{item.username}</Text>
+        <Text appearance="hint" category="s1">
+          {item.email}
+        </Text>
+      </ListItem>
+    );
+
+    /**
      * Renderiza cada item da lista de tecnologia
      * @param item
      */
@@ -73,15 +85,26 @@ const UserTechnologyScreenComponent = connect(
       item,
     }: ListRenderItemInfo<UsersTechnology>): ListItemElement => (
       <ListItem style={props.themedStyle.item}>
-        <Text category="s1">{item.technology}</Text>
-        <Text appearance="hint" category="c1">
+        <Text category="h6">{item.technology}</Text>
+        <Text appearance="hint" category="s1">
           {item.users.length.toString()} Users
         </Text>
+        <List
+          style={props.themedStyle.list}
+          data={item.users}
+          renderItem={renderUser}
+        />
       </ListItem>
     );
 
     return (
       <Layout style={props.themedStyle.container}>
+        <Text
+          appearance="hint"
+          style={[props.themedStyle.title, props.themedStyle.item]}
+          category="h6">
+          Users for each technology today
+        </Text>
         <List
           style={props.themedStyle.list}
           data={usersTechnology}
@@ -120,6 +143,9 @@ export const UserTechnologyScreen = withStyles(
       borderRadius: 50,
       width: 70,
       height: 70,
+    },
+    title: {
+      marginTop: 10,
     },
   }),
 );

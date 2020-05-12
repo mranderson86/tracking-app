@@ -1,6 +1,7 @@
 import React from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {
+  Divider,
   Text,
   Layout,
   List,
@@ -57,12 +58,15 @@ const UserTechnologyScreenComponent = connect(
 )(
   (props: Props): ListElement => {
     const {usersTechnology} = props.UsersTechnology;
+    const {technologies} = props.Technology;
     const {token} = props.Authentication;
+
+    console.log(technologies, usersTechnology);
 
     React.useEffect(() => {
       // Consulta todas as tecnologias
       props.usersTechnologyRequest(token);
-    }, []);
+    }, [technologies]);
 
     /**
      * Renderiza cada item da lista de usuário
@@ -84,17 +88,20 @@ const UserTechnologyScreenComponent = connect(
     const renderTechnology = ({
       item,
     }: ListRenderItemInfo<UsersTechnology>): ListItemElement => (
-      <ListItem style={props.themedStyle.item}>
-        <Text category="h6">{item.technology}</Text>
-        <Text appearance="hint" category="s1">
-          {item.users.length.toString()} Users
-        </Text>
-        <List
-          style={props.themedStyle.list}
-          data={item.users}
-          renderItem={renderUser}
-        />
-      </ListItem>
+      <React.Fragment>
+        <ListItem style={props.themedStyle.item}>
+          <Text category="h6">{item.technology}</Text>
+          <Text appearance="hint" category="s1">
+            {item.users.length.toString()} Users
+          </Text>
+          <List
+            style={props.themedStyle.list}
+            data={item.users}
+            renderItem={renderUser}
+          />
+        </ListItem>
+        <Divider />
+      </React.Fragment>
     );
 
     return (
@@ -102,8 +109,8 @@ const UserTechnologyScreenComponent = connect(
         <Text
           appearance="hint"
           style={[props.themedStyle.title, props.themedStyle.item]}
-          category="h6">
-          Users for each technology today
+          category="h5">
+          Users x Technology
         </Text>
         <List
           style={props.themedStyle.list}

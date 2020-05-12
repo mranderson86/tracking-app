@@ -95,7 +95,7 @@ export const SignInScreen = connect(
       <React.Fragment>
         <ImageBackground
           style={styles.appBar}
-          source={require('../../assets/image-background.jpeg')}
+          source={require('../../assets/image_welcome.png')}
         />
         <Layout style={styles.formContainer}>
           <Formik

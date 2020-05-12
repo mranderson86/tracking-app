@@ -1,6 +1,7 @@
 import React from 'react';
 import {ListRenderItemInfo} from 'react-native';
 import {
+  Divider,
   Text,
   Layout,
   List,
@@ -28,9 +29,11 @@ import {connect} from 'react-redux';
 const mapStateToProps = ({
   TechnologiesUser,
   Authentication,
+  Technology,
 }: ApplicationState) => ({
   TechnologiesUser,
   Authentication,
+  Technology,
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
@@ -57,12 +60,13 @@ const TechnologyUserScreenComponent = connect(
 )(
   (props: Props): ListElement => {
     const {technologiesUser} = props.TechnologiesUser;
+    const {technologies} = props.Technology;
     const {token} = props.Authentication;
 
     React.useEffect(() => {
       // Consulta todas as tecnologias
       props.technologiesUserRequest(token);
-    }, []);
+    }, [technologies]);
 
     /**
      * Renderiza cada item da lista de tecnologia
@@ -85,17 +89,20 @@ const TechnologyUserScreenComponent = connect(
     const renderUser = ({
       item,
     }: ListRenderItemInfo<TechnologiesUser>): ListItemElement => (
-      <ListItem style={props.themedStyle.item}>
-        <Text category="h6">{item.username}</Text>
-        <Text appearance="hint" category="s1">
-          {item.technologies.length.toString()} Technologies
-        </Text>
-        <List
-          style={props.themedStyle.list}
-          data={item.technologies}
-          renderItem={renderTechnology}
-        />
-      </ListItem>
+      <React.Fragment>
+        <ListItem style={props.themedStyle.item}>
+          <Text category="h6">{item.username}</Text>
+          <Text appearance="hint" category="s1">
+            {item.technologies.length.toString()} Technologies
+          </Text>
+          <List
+            style={props.themedStyle.list}
+            data={item.technologies}
+            renderItem={renderTechnology}
+          />
+        </ListItem>
+        <Divider />
+      </React.Fragment>
     );
 
     return (
@@ -103,8 +110,8 @@ const TechnologyUserScreenComponent = connect(
         <Text
           appearance="hint"
           style={[props.themedStyle.title, props.themedStyle.item]}
-          category="h6">
-          Technologies for every user today
+          category="h5">
+          Technologies x User
         </Text>
         <List
           style={props.themedStyle.list}

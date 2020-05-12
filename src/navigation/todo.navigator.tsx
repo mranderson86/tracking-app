@@ -2,7 +2,7 @@ import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 import {AppRoute} from './app-routes';
-import {TodoTabBar, TodoDoneScreen} from '../scenes/todo';
+import {TodoTabBar} from '../scenes/todo';
 import {
   TechnologyScreen,
   UserTechnologyScreen,

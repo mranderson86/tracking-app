@@ -75,7 +75,7 @@ export const SignUpScreen = connect(
       <React.Fragment>
         <ImageBackground
           style={[styles.appBar, {paddingTop: insets.top}]}
-          source={require('../../assets/image-background.jpeg')}>
+          source={require('../../assets/image_welcome.png')}>
           <Toolbar appearance="control" onBackPress={props.navigation.goBack} />
         </ImageBackground>
         <Layout style={styles.formContainer}>

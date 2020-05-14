@@ -22,13 +22,13 @@ function* registerRequestAsync({payload}: any) {
     const {data} = response;
 
     if (data) {
-      const profile: Profile = {
-        username,
-        email,
-      };
+      // const profile: Profile = {
+      //  username,
+      //  email,
+      //};
 
       // Cadastrado com sucesso
-      yield put(registerSuccess(profile));
+      // yield put(registerSuccess(profile));
 
       const user: SignInData = {
         email,
@@ -49,4 +49,80 @@ function* registerRequestAsync({payload}: any) {
 export function* watchRegisterRequest() {
   // Take Last Action
   yield takeLatest(RegisterTypes.REGISTER_REQUEST, registerRequestAsync);
+}
+
+/**
+ * Consulta perfil do usuário
+ */
+function* profileRequestAsync({payload}: any) {
+  try {
+    const {token} = payload;
+
+    // Requisição de perfil
+    const response = yield call(api.get, 'users/profile', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const {data} = response;
+
+    if (data) {
+      const profile: Profile = {
+        username: data.username,
+        email: data.email,
+      };
+
+      // Cadastrado com sucesso
+      yield put(registerSuccess(profile));
+    }
+  } catch (error) {
+    console.log('ProfileRequest  => ', error);
+
+    yield put(registerFailure());
+  }
+}
+
+// Watch Profile Request
+export function* watchProfileRequest() {
+  // Take Last Action
+  yield takeLatest(RegisterTypes.PROFILE_REQUEST, profileRequestAsync);
+}
+
+/**
+ * Atualiza perfil do usuário
+ */
+function* profileUpdateAsync({payload}: any) {
+  try {
+    const {token, profile} = payload;
+
+    // Requisição de perfil
+    const response = yield call(api.post, 'users/profile', profile, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const {data} = response;
+
+    if (data) {
+      const profile: Profile = {
+        username: data.username,
+        email: data.email,
+      };
+
+      // Cadastrado com sucesso
+      yield put(registerSuccess(profile));
+    }
+  } catch (error) {
+    console.log('ProfileRequest  => ', error);
+
+    yield put(registerFailure());
+  }
+}
+
+// Watch Profile Request
+export function* watchProfileUpdate() {
+  // Take Last Action
+  yield takeLatest(RegisterTypes.PROFILE_UPDATE, profileUpdateAsync);
 }

@@ -136,8 +136,6 @@ export const TechnologyScreen = withStyles(
     },
     item: {
       flexDirection: 'row',
-      // justifyContent: 'space-between',
-      // alignItems: 'center',
       paddingHorizontal: 12,
       marginHorizontal: 12,
     },

@@ -7,6 +7,8 @@ export enum RegisterTypes {
   REGISTER_REQUEST = '@register/REQUEST',
   REGISTER_SUCCESS = '@register/SUCCESS',
   REGISTER_FAILURE = '@register/FAILURE',
+  PROFILE_REQUEST = '@profile/REQUEST',
+  PROFILE_UPDATE = '@profile/UPDATE',
 }
 
 export interface Profile {

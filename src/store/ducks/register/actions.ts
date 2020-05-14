@@ -19,3 +19,16 @@ export const registerSuccess = (profile: Profile) =>
  *  Action Register Failure User
  */
 export const registerFailure = () => action(RegisterTypes.REGISTER_FAILURE);
+
+/**
+ * Action Profile Request
+ */
+export const profileRequest = (token: string) =>
+  action(RegisterTypes.PROFILE_REQUEST, {token});
+
+/**
+ * Atualiza o nome do usuário
+ * @param username
+ */
+export const profileUpdate = (token: string, profile: Profile) =>
+  action(RegisterTypes.PROFILE_UPDATE, {token, profile});

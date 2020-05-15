@@ -73,7 +73,7 @@ const UserTechnologyScreenComponent = connect(
      * @param item
      */
     const renderUser = ({item}: ListRenderItemInfo<User>): ListItemElement => (
-      <ListItem style={props.themedStyle.item}>
+      <ListItem style={props.themedStyle.item} disabled>
         <Text category="h6">{item.username}</Text>
         <Text appearance="hint" category="s1">
           {item.email}
@@ -89,7 +89,7 @@ const UserTechnologyScreenComponent = connect(
       item,
     }: ListRenderItemInfo<UsersTechnology>): ListItemElement => (
       <React.Fragment>
-        <ListItem style={props.themedStyle.item}>
+        <ListItem style={props.themedStyle.item} disabled>
           <Text category="h6">{item.technology}</Text>
           <Text appearance="hint" category="s1">
             {item.users.length.toString()} Users

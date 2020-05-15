@@ -1,9 +1,9 @@
 {
-  "name": "AppKitten",
-  "display": "AppKitten",
+  "name": "TrackingTechnology",
+  "display": "Tracking Of Technology",
   "expo": {
-    "name": "uiKitten",
-    "slug": "uikitten",
+    "name": "TrackingTechnology",
+    "slug": "TrackingTechnology",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,11 +18,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "bundleIdentifier": "br.mister86.uikitten",
+      "bundleIdentifier": "br.mister86.trackingTech",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "br.mister86.uikitten",
+      "package": "br.mister86.trackingTech",
       "versionCode": 1
     }
   }

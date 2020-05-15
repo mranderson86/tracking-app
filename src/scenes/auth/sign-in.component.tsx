@@ -1,6 +1,6 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
-import {Button, CheckBox, Layout, LayoutElement} from '@ui-kitten/components';
+import {Button, Spinner, Layout, LayoutElement} from '@ui-kitten/components';
 import {Formik, FormikProps, FormikHelpers, FormikErrors} from 'formik';
 import {SignInScreenProps} from '../../navigation/auth.navigator';
 import {AppRoute} from '../../navigation/app-routes';
@@ -85,9 +85,15 @@ export const SignInScreen = connect(
           icon={passwordVisible ? EyeIcon : EyeOffIcon}
           onIconPress={onPasswordIconPress}
         />
-        <Button style={styles.submitButton} onPress={props.handleSubmit}>
-          SIGN IN
-        </Button>
+        {props.isSubmitting ? (
+          <View style={styles.spinner}>
+            <Spinner />
+          </View>
+        ) : (
+          <Button style={styles.submitButton} onPress={props.handleSubmit}>
+            SIGN IN
+          </Button>
+        )}
       </React.Fragment>
     );
 
@@ -138,5 +144,9 @@ const styles = StyleSheet.create({
   },
   noAccountButton: {
     alignSelf: 'center',
+  },
+  spinner: {
+    alignSelf: 'center',
+    marginVertical: 24,
   },
 });

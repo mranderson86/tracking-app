@@ -83,7 +83,7 @@ const TechnologyScreenComponent = connect(
     const renderTechnology = ({
       item,
     }: ListRenderItemInfo<Technology>): ListItemElement => (
-      <ListItem style={props.themedStyle.item}>
+      <ListItem style={props.themedStyle.item} disabled>
         <CheckBox
           style={props.themedStyle.checkbox}
           checked={item.checked}

@@ -1,7 +1,11 @@
 import {all, fork} from 'redux-saga/effects';
 
 import {watchLoginRequest} from './authentication/sagas';
-import {watchRegisterRequest, watchProfileRequest} from './register/sagas';
+import {
+  watchRegisterRequest,
+  watchProfileRequest,
+  watchProfileUpdate,
+} from './register/sagas';
 import {
   watchTechnologiesRequest,
   watchTechnologiesSave,
@@ -19,5 +23,6 @@ export default function* rootSaga() {
     fork(watchUsersTechnologyRequest),
     fork(watchTechnologiesUserRequest),
     fork(watchProfileRequest),
+    fork(watchProfileUpdate),
   ]);
 }

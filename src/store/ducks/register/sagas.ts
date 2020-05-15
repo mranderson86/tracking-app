@@ -94,10 +94,11 @@ export function* watchProfileRequest() {
  */
 function* profileUpdateAsync({payload}: any) {
   try {
-    const {token, profile} = payload;
+    console.log(payload);
 
+    const {token, profile} = payload;
     // Requisição de perfil
-    const response = yield call(api.post, 'users/profile', profile, {
+    const response = yield call(api.put, 'users', profile, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -106,16 +107,11 @@ function* profileUpdateAsync({payload}: any) {
     const {data} = response;
 
     if (data) {
-      const profile: Profile = {
-        username: data.username,
-        email: data.email,
-      };
-
-      // Cadastrado com sucesso
+      // Atualizado com sucesso
       yield put(registerSuccess(profile));
     }
   } catch (error) {
-    console.log('ProfileRequest  => ', error);
+    console.log('Profile Update Request  => ', error);
 
     yield put(registerFailure());
   }

@@ -11,9 +11,9 @@ import {
 import {MenuIcon} from '../../assets/icons';
 import {Formik, FormikProps} from 'formik';
 import {FormInput} from '../../components/form-input.component';
-import {SignUpData, SignUpSchema} from '../../data/sign-up.model';
+import {ProfileData, ProfileDataSchema} from '../../data/profile.model';
 
-import {RegisterTypes} from '../../store/ducks/register/types';
+import {RegisterTypes, Profile} from '../../store/ducks/register/types';
 import {ApplicationState} from '../../store';
 
 import {connect} from 'react-redux';
@@ -26,9 +26,12 @@ const mapStateToProps = ({Authentication, Register}: ApplicationState) => ({
 type StateProps = ReturnType<typeof mapStateToProps>;
 
 const mapDispatchToProps = {
-  registerRequest: (register: SignUpData) => ({
-    type: RegisterTypes.REGISTER_REQUEST,
-    payload: register,
+  profileUpdateRequest: (token: string, profile: Profile) => ({
+    type: RegisterTypes.PROFILE_UPDATE,
+    payload: {
+      token,
+      profile,
+    },
   }),
 };
 
@@ -45,25 +48,34 @@ export const ProfileScreen = connect(
     const {token} = props.Authentication;
     const {profile} = props.Register;
 
-    console.log(profile);
+    // console.log(profile);
 
-    const onFormSubmit = (): void => {};
+    const onFormSubmit = ({username}: ProfileData): void => {
+      props.profileUpdateRequest(token, {...profile, username});
+    };
 
     const renderForm = (
-      props: FormikProps<SignUpData>,
+      props: FormikProps<ProfileData>,
     ): React.ReactFragment => (
       <React.Fragment>
         <FormInput
+          value={profile.email}
           id="email"
           style={styles.formControl}
-          placeholder="Email"
           keyboardType="email-address"
+          disabled
+        />
+        <FormInput
+          value={profile.username}
+          id="userNameLast"
+          style={styles.formControl}
+          placeholder="Password"
           disabled
         />
         <FormInput
           id="username"
           style={styles.formControl}
-          placeholder="Username"
+          placeholder="New Username"
         />
         <Button style={styles.submitButton} onPress={props.handleSubmit}>
           UPDATE
@@ -80,10 +92,10 @@ export const ProfileScreen = connect(
         />
         <Divider />
         <Layout style={styles.formContainer}>
-          <Text category="h2">PROFILE</Text>
+          <Text category="h5">PROFILE</Text>
           <Formik
-            initialValues={SignUpData.empty()}
-            validationSchema={SignUpSchema}
+            initialValues={ProfileData.empty()}
+            validationSchema={ProfileDataSchema}
             onSubmit={onFormSubmit}>
             {renderForm}
           </Formik>

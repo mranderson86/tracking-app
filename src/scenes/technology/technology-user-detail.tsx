@@ -11,8 +11,6 @@ import {
   withStyles,
 } from '@ui-kitten/components';
 
-import {AppRoute} from '../../navigation/app-routes';
-
 import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
 
 import {Technology} from '../../store/ducks/technology/types';

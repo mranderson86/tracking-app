@@ -12,7 +12,7 @@ import {
   withStyles,
 } from '@ui-kitten/components';
 
-import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
+import {UsersTechnologyScreenProps} from '../../navigation/todo.navigator';
 
 import {ApplicationState} from '../../store';
 import {
@@ -20,6 +20,8 @@ import {
   UsersTechnology,
   User,
 } from '../../store/ducks/users-technology/types';
+
+import {PersonIcon, CodeOutlineIcon} from '../../assets/icons';
 
 import {connect} from 'react-redux';
 
@@ -49,7 +51,7 @@ type DispatchProps = typeof mapDispatchToProps;
 
 type Props = StateProps &
   DispatchProps &
-  TodoInProgressScreenProps &
+  UsersTechnologyScreenProps &
   ThemedComponentProps;
 
 const UserTechnologyScreenComponent = connect(
@@ -61,8 +63,6 @@ const UserTechnologyScreenComponent = connect(
     const {technologies} = props.Technology;
     const {token} = props.Authentication;
 
-    console.log(technologies, usersTechnology);
-
     React.useEffect(() => {
       // Consulta todas as tecnologias
       props.usersTechnologyRequest(token);
@@ -73,7 +73,7 @@ const UserTechnologyScreenComponent = connect(
      * @param item
      */
     const renderUser = ({item}: ListRenderItemInfo<User>): ListItemElement => (
-      <ListItem style={props.themedStyle.item} disabled>
+      <ListItem icon={PersonIcon} style={props.themedStyle.item} disabled>
         <Text category="h6">{item.username}</Text>
         <Text appearance="hint" category="s1">
           {item.email}
@@ -89,7 +89,10 @@ const UserTechnologyScreenComponent = connect(
       item,
     }: ListRenderItemInfo<UsersTechnology>): ListItemElement => (
       <React.Fragment>
-        <ListItem style={props.themedStyle.item} disabled>
+        <ListItem
+          icon={CodeOutlineIcon}
+          style={props.themedStyle.item}
+          disabled>
           <Text category="h6">{item.technology}</Text>
           <Text appearance="hint" category="s1">
             {item.users.length.toString()} Users
@@ -141,15 +144,6 @@ export const UserTechnologyScreen = withStyles(
       alignItems: 'flex-start',
       paddingHorizontal: 12,
       marginHorizontal: 12,
-    },
-    fab: {
-      position: 'absolute',
-      margin: 20,
-      right: 0,
-      bottom: 0,
-      borderRadius: 50,
-      width: 70,
-      height: 70,
     },
     title: {
       marginTop: 10,

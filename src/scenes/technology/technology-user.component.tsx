@@ -12,9 +12,9 @@ import {
   withStyles,
 } from '@ui-kitten/components';
 
-import {AppRoute} from '../../navigation/app-routes';
+import {TechnologiesUserScreenProps} from '../../navigation/todo.navigator';
 
-import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
+import {PeopleOutlineIcon, CodeOutlineIcon} from '../../assets/icons';
 
 import {ApplicationState} from '../../store';
 import {
@@ -51,7 +51,7 @@ type DispatchProps = typeof mapDispatchToProps;
 
 type Props = StateProps &
   DispatchProps &
-  TodoInProgressScreenProps &
+  TechnologiesUserScreenProps &
   ThemedComponentProps;
 
 const TechnologyUserScreenComponent = connect(
@@ -75,7 +75,7 @@ const TechnologyUserScreenComponent = connect(
     const renderTechnology = ({
       item,
     }: ListRenderItemInfo<Technology>): ListItemElement => (
-      <ListItem style={props.themedStyle.item} disabled>
+      <ListItem icon={CodeOutlineIcon} style={props.themedStyle.item}>
         <Text appearance="hint" category="s2">
           {item.technology}
         </Text>
@@ -90,7 +90,7 @@ const TechnologyUserScreenComponent = connect(
       item,
     }: ListRenderItemInfo<TechnologiesUser>): ListItemElement => (
       <React.Fragment>
-        <ListItem style={props.themedStyle.item} disabled>
+        <ListItem icon={PeopleOutlineIcon} style={props.themedStyle.item}>
           <Text category="h6">{item.username}</Text>
           <Text appearance="hint" category="s1">
             {item.technologies.length.toString()} Technologies
@@ -146,15 +146,6 @@ export const TechnologyUserScreen = withStyles(
     itemProgressBar: {
       width: '50%',
       marginVertical: 12,
-    },
-    fab: {
-      position: 'absolute',
-      margin: 20,
-      right: 0,
-      bottom: 0,
-      borderRadius: 50,
-      width: 70,
-      height: 70,
     },
     title: {
       marginTop: 10,

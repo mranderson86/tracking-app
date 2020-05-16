@@ -18,9 +18,9 @@ export const AboutScreen = (props: AboutScreenProps): SafeAreaLayoutElement => (
     <Divider />
     <Layout style={styles.container}>
       <Text category="h3">Tracking of Technology</Text>
-      <Text category="h5">Version 1.0</Text>
-      <Text category="h6">Development by Anderson Gomes</Text>
-      <Text category="h6">mr.anderson.brito@gmail.com</Text>
+      <Text category="s1">Version 1.0</Text>
+      <Text category="s1">Development by Anderson Gomes</Text>
+      <Text category="s2">mr.anderson.brito@gmail.com</Text>
     </Layout>
   </SafeAreaLayout>
 );

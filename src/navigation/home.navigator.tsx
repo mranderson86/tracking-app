@@ -2,6 +2,9 @@ import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+import {RouteProp} from '@react-navigation/core';
+import {DrawerNavigationProp} from '@react-navigation/drawer';
+
 import {TodoNavigator} from './todo.navigator';
 import {ProfileNavigator} from './profile.navigator';
 import {AppRoute} from './app-routes';
@@ -21,6 +24,22 @@ import {
 
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
+
+type HomeNavigatorParams = {
+  [AppRoute.HOME]: undefined;
+  [AppRoute.ABOUT]: undefined;
+  [AppRoute.LOGOUT]: undefined;
+};
+
+export interface AboutScreenProps {
+  navigation: DrawerNavigationProp<HomeNavigatorParams, AppRoute.ABOUT>;
+  route: RouteProp<HomeNavigatorParams, AppRoute.ABOUT>;
+}
+
+export interface HomeScreenProps {
+  navigation: DrawerNavigationProp<HomeNavigatorParams, AppRoute.HOME>;
+  route: RouteProp<HomeNavigatorParams, AppRoute.HOME>;
+}
 
 const HomeBottomNavigator = (): React.ReactElement => (
   <BottomTab.Navigator tabBar={props => <HomeTabBar {...props} />}>

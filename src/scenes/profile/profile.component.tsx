@@ -1,7 +1,10 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Divider, Layout, Text, Button} from '@ui-kitten/components';
+import {StyleSheet, View} from 'react-native';
+import {Divider, Layout, Spinner, Text, Button} from '@ui-kitten/components';
 import {ProfileScreenProps} from '../../navigation/profile.navigator';
+
+import {HomeScreenProps} from '../../navigation/home.navigator';
+
 import {Toolbar} from '../../components/toolbar.component';
 import {
   SafeAreaLayout,
@@ -38,7 +41,7 @@ const mapDispatchToProps = {
 // Redux Action Register Request
 type DispatchProps = typeof mapDispatchToProps;
 
-type Props = StateProps & ProfileScreenProps & DispatchProps;
+type Props = StateProps & ProfileScreenProps & HomeScreenProps & DispatchProps;
 
 export const ProfileScreen = connect(
   mapStateToProps,
@@ -46,9 +49,10 @@ export const ProfileScreen = connect(
 )(
   (props: Props): SafeAreaLayoutElement => {
     const {token} = props.Authentication;
-    const {profile} = props.Register;
-
-    // console.log(profile);
+    const {
+      profile,
+      loading,
+    }: {profile: Profile; loading: boolean} = props.Register;
 
     const onFormSubmit = ({username}: ProfileData): void => {
       props.profileUpdateRequest(token, {...profile, username});
@@ -77,9 +81,16 @@ export const ProfileScreen = connect(
           style={styles.formControl}
           placeholder="New Username"
         />
-        <Button style={styles.submitButton} onPress={props.handleSubmit}>
-          UPDATE
-        </Button>
+
+        {loading ? (
+          <View style={styles.spinner}>
+            <Spinner />
+          </View>
+        ) : (
+          <Button style={styles.submitButton} onPress={props.handleSubmit}>
+            UPDATE
+          </Button>
+        )}
       </React.Fragment>
     );
 
@@ -131,5 +142,10 @@ const styles = StyleSheet.create({
   },
   haveAccountButton: {
     alignSelf: 'center',
+  },
+  spinner: {
+    alignSelf: 'center',
+    marginVertical: 24,
+    height: 42,
   },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListRenderItemInfo} from 'react-native';
+import {ListRenderItemInfo, View} from 'react-native';
 import {
   Text,
   Button,
@@ -11,12 +11,17 @@ import {
   ListItemElement,
   ThemedComponentProps,
   withStyles,
+  Spinner,
 } from '@ui-kitten/components';
 
-import {TodoInProgressScreenProps} from '../../navigation/todo.navigator';
+import {TechnologyScreenProps} from '../../navigation/todo.navigator';
 
 import {ApplicationState} from '../../store';
-import {TechnologyTypes, Technology} from '../../store/ducks/technology/types';
+import {
+  TechnologyTypes,
+  Technology,
+  TechnologyState,
+} from '../../store/ducks/technology/types';
 import {DoneAllIcon} from '../../assets/icons';
 
 import {connect} from 'react-redux';
@@ -52,7 +57,7 @@ type DispatchProps = typeof mapDispatchToProps;
 
 type Props = StateProps &
   DispatchProps &
-  TodoInProgressScreenProps &
+  TechnologyScreenProps &
   ThemedComponentProps;
 
 const TechnologyScreenComponent = connect(
@@ -60,7 +65,7 @@ const TechnologyScreenComponent = connect(
   mapDispatchToProps,
 )(
   (props: Props): ListElement => {
-    const {technologies} = props.Technology;
+    const {technologies, loading}: TechnologyState = props.Technology;
     const {token} = props.Authentication;
 
     React.useEffect(() => {
@@ -70,7 +75,7 @@ const TechnologyScreenComponent = connect(
 
     // Renderiza o botão FAB se houver tecnologias marcadas
     const showRenderFab = (): boolean => {
-      const selected: [] = technologies.filter(
+      const selected: Technology[] = technologies.filter(
         (item: Technology) => item.checked,
       );
       return selected.length > 0;
@@ -103,17 +108,26 @@ const TechnologyScreenComponent = connect(
           category="h6">
           Choose your technology below
         </Text>
-        <List
-          style={props.themedStyle.list}
-          data={technologies}
-          renderItem={renderTechnology}
-        />
-        {showRenderFab() && (
-          <Button
-            style={props.themedStyle.fab}
-            icon={DoneAllIcon}
-            onPress={() => props.technologySave(technologies, token)}
-          />
+
+        {loading ? (
+          <View style={props.themedStyle.spinner}>
+            <Spinner />
+          </View>
+        ) : (
+          <React.Fragment>
+            <List
+              style={props.themedStyle.list}
+              data={technologies}
+              renderItem={renderTechnology}
+            />
+            {showRenderFab() && (
+              <Button
+                style={props.themedStyle.fab}
+                icon={DoneAllIcon}
+                onPress={() => props.technologySave(technologies, token)}
+              />
+            )}
+          </React.Fragment>
         )}
       </Layout>
     );
@@ -155,6 +169,11 @@ export const TechnologyScreen = withStyles(
     checkbox: {marginRight: 20},
     title: {
       marginTop: 10,
+    },
+    spinner: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   }),
 );

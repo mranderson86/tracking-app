@@ -22,14 +22,6 @@ function* registerRequestAsync({payload}: any) {
     const {data} = response;
 
     if (data) {
-      // const profile: Profile = {
-      //  username,
-      //  email,
-      //};
-
-      // Cadastrado com sucesso
-      // yield put(registerSuccess(profile));
-
       const user: SignInData = {
         email,
         password,
@@ -39,8 +31,6 @@ function* registerRequestAsync({payload}: any) {
       yield put({type: LoginTypes.LOGIN_REQUEST, payload: user});
     }
   } catch (error) {
-    console.log('RegisterRequest  => ', error);
-
     yield put(registerFailure());
   }
 }
@@ -77,8 +67,6 @@ function* profileRequestAsync({payload}: any) {
       yield put(registerSuccess(profile));
     }
   } catch (error) {
-    console.log('ProfileRequest  => ', error);
-
     yield put(registerFailure());
   }
 }
@@ -94,8 +82,6 @@ export function* watchProfileRequest() {
  */
 function* profileUpdateAsync({payload}: any) {
   try {
-    console.log(payload);
-
     const {token, profile} = payload;
     // Requisição de perfil
     const response = yield call(api.put, 'users', profile, {
@@ -111,8 +97,6 @@ function* profileUpdateAsync({payload}: any) {
       yield put(registerSuccess(profile));
     }
   } catch (error) {
-    console.log('Profile Update Request  => ', error);
-
     yield put(registerFailure());
   }
 }

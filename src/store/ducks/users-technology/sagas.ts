@@ -15,8 +15,6 @@ function* UsersTechnologyRequestAsync({payload}: any) {
 
     yield put(usersTechnologySuccess(usersTechnology));
   } catch (error) {
-    console.log(error);
-
     yield put(usersTechnologyFailure());
   }
 }

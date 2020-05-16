@@ -1,7 +1,7 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {Button, Spinner, Layout, LayoutElement} from '@ui-kitten/components';
-import {Formik, FormikProps, FormikHelpers, FormikErrors} from 'formik';
+import {Formik, FormikProps} from 'formik';
 import {SignInScreenProps} from '../../navigation/auth.navigator';
 import {AppRoute} from '../../navigation/app-routes';
 import {FormInput} from '../../components/form-input.component';
@@ -10,7 +10,10 @@ import {SignInData, SignInSchema} from '../../data/sign-in.model';
 
 import {connect} from 'react-redux';
 import {ApplicationState} from '../../store';
-import {LoginTypes} from '../../store/ducks/authentication/types';
+import {
+  LoginTypes,
+  AuthenticationState,
+} from '../../store/ducks/authentication/types';
 
 // Integrando State em Props
 const mapStateToProps = ({Authentication}: ApplicationState) => ({
@@ -41,13 +44,9 @@ export const SignInScreen = connect(
       false,
     );
 
-    const onFormSubmit = (
-      values: SignInData,
-      formikHelpers: FormikHelpers<SignInData>,
-    ): void => {
-      // !values.email && formikHelpers.setFieldError('email', 'E-mail is empty');
-      //!values.password &&
-      //  formikHelpers.setFieldError('password', 'Password is empty');
+    const {Authentication} = props;
+
+    const onFormSubmit = (values: SignInData): void => {
       props.loadRequest(values);
     };
 
@@ -85,7 +84,8 @@ export const SignInScreen = connect(
           icon={passwordVisible ? EyeIcon : EyeOffIcon}
           onIconPress={onPasswordIconPress}
         />
-        {props.isSubmitting ? (
+
+        {Authentication.loading ? (
           <View style={styles.spinner}>
             <Spinner />
           </View>
@@ -148,5 +148,6 @@ const styles = StyleSheet.create({
   spinner: {
     alignSelf: 'center',
     marginVertical: 24,
+    height: 42,
   },
 });

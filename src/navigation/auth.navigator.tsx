@@ -23,7 +23,7 @@ type AuthNavigatorParams = {
   [AppRoute.SIGN_IN]: undefined;
   [AppRoute.SIGN_UP]: undefined;
   [AppRoute.RESET_PASSWORD]: undefined;
-  [AppRoute.HOME]: undefined;
+  // [AppRoute.HOME]: undefined;
 };
 
 export interface SignInScreenProps {

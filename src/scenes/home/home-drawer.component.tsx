@@ -12,7 +12,9 @@ export const HomeDrawer = (props): DrawerElement => {
     props.navigation.closeDrawer();
   };
 
-  const createNavigationItemForRoute = (route): MenuItemType => {
+  const createNavigationItemForRoute = (
+    route,
+  ): MenuItemType & {routeName: string} => {
     const {options} = props.descriptors[route.key];
     return {
       routeName: route.name,

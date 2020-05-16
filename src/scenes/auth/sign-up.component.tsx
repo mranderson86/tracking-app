@@ -1,8 +1,8 @@
 import React from 'react';
-import {ImageBackground, StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import {EdgeInsets, useSafeArea} from 'react-native-safe-area-context';
 import {Formik, FormikProps} from 'formik';
-import {Button, Layout, LayoutElement} from '@ui-kitten/components';
+import {Button, Spinner, Layout, LayoutElement} from '@ui-kitten/components';
 
 import {SignUpScreenProps} from '../../navigation/auth.navigator';
 import {AppRoute} from '../../navigation/app-routes';
@@ -65,9 +65,16 @@ export const SignUpScreen = connect(
           style={styles.formControl}
           placeholder="Username"
         />
-        <Button style={styles.submitButton} onPress={props.handleSubmit}>
-          SIGN UP
-        </Button>
+
+        {props.isSubmitting ? (
+          <View style={styles.spinner}>
+            <Spinner />
+          </View>
+        ) : (
+          <Button style={styles.submitButton} onPress={props.handleSubmit}>
+            SIGN UP
+          </Button>
+        )}
       </React.Fragment>
     );
 
@@ -115,5 +122,9 @@ const styles = StyleSheet.create({
   },
   haveAccountButton: {
     alignSelf: 'center',
+  },
+  spinner: {
+    alignSelf: 'center',
+    marginVertical: 24,
   },
 });

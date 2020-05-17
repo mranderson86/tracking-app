@@ -5,7 +5,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RouteProp} from '@react-navigation/core';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
 
-import {TodoNavigator} from './todo.navigator';
+import {TodoNavigator} from './technology.navigator';
 import {ProfileNavigator} from './profile.navigator';
 import {AppRoute} from './app-routes';
 import {

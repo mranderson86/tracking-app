@@ -11,7 +11,7 @@ import {MenuIcon} from '../../assets/icons';
 /**
  * Navega para tela ao clicar em cada aba
  */
-export const TodoTabBar = (props): SafeAreaLayoutElement => {
+export const TechnologyTabBar = (props): SafeAreaLayoutElement => {
   const onTabSelect = (index: number): void => {
     const selectedTabRoute: string = props.state.routeNames[index];
     props.navigation.navigate(selectedTabRoute);

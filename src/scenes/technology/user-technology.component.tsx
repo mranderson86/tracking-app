@@ -12,7 +12,7 @@ import {
   withStyles,
 } from '@ui-kitten/components';
 
-import {UsersTechnologyScreenProps} from '../../navigation/todo.navigator';
+import {UsersTechnologyScreenProps} from '../../navigation/technology.navigator';
 
 import {ApplicationState} from '../../store';
 import {

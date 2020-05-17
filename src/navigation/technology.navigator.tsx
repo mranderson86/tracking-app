@@ -5,7 +5,7 @@ import {RouteProp} from '@react-navigation/core';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {AppRoute} from './app-routes';
-import {TodoTabBar} from '../scenes/todo';
+import {TechnologyTabBar} from '../scenes/technology';
 import {
   TechnologyScreen,
   UserTechnologyScreen,
@@ -43,7 +43,7 @@ export interface TechnologyScreenProps {
 }
 
 export const TodoNavigator = (): React.ReactElement => (
-  <TopTab.Navigator tabBar={props => <TodoTabBar {...props} />}>
+  <TopTab.Navigator tabBar={props => <TechnologyTabBar {...props} />}>
     <TopTab.Screen
       name={AppRoute.TECHNOLOGY}
       component={TechnologyScreen}

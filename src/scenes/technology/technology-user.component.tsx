@@ -12,7 +12,7 @@ import {
   withStyles,
 } from '@ui-kitten/components';
 
-import {TechnologiesUserScreenProps} from '../../navigation/todo.navigator';
+import {TechnologiesUserScreenProps} from '../../navigation/technology.navigator';
 
 import {PeopleOutlineIcon, CodeOutlineIcon} from '../../assets/icons';
 

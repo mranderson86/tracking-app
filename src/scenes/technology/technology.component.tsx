@@ -14,7 +14,7 @@ import {
   Spinner,
 } from '@ui-kitten/components';
 
-import {TechnologyScreenProps} from '../../navigation/todo.navigator';
+import {TechnologyScreenProps} from '../../navigation/technology.navigator';
 
 import {ApplicationState} from '../../store';
 import {

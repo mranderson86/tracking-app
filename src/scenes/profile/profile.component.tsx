@@ -105,6 +105,7 @@ export const ProfileScreen = connect(
         <Layout style={styles.formContainer}>
           <Text category="h5">PROFILE</Text>
           <Formik
+            validateOnChange={false}
             initialValues={ProfileData.empty()}
             validationSchema={ProfileDataSchema}
             onSubmit={onFormSubmit}>

@@ -1,18 +1,20 @@
 import React from 'react';
-import { Input, InputElement, InputProps } from '@ui-kitten/components';
-import { FormikContextType, useFormikContext } from 'formik';
-import { AlertTriangleIcon } from '../assets/icons';
+import {Input, InputElement, InputProps} from '@ui-kitten/components';
+import {FormikContextType, useFormikContext} from 'formik';
+import {AlertTriangleIcon} from '../assets/icons';
 
 interface FormInputProps extends InputProps {
   id: string;
 }
 
-export const FormInput = ({ id, ...inputProps }: FormInputProps): InputElement => {
-
+export const FormInput = ({
+  id,
+  ...inputProps
+}: FormInputProps): InputElement => {
   const formContext: FormikContextType<{}> = useFormikContext();
 
   // @ts-ignore
-  const { [id]: error } = formContext.errors;
+  const {[id]: error} = formContext.errors;
 
   const fieldProps: Partial<InputProps> = {
     status: error && 'danger',
@@ -28,4 +30,3 @@ export const FormInput = ({ id, ...inputProps }: FormInputProps): InputElement =
     />
   );
 };
-

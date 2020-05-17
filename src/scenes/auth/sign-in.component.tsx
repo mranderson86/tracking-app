@@ -10,10 +10,7 @@ import {SignInData, SignInSchema} from '../../data/sign-in.model';
 
 import {connect} from 'react-redux';
 import {ApplicationState} from '../../store';
-import {
-  LoginTypes,
-  AuthenticationState,
-} from '../../store/ducks/authentication/types';
+import {LoginTypes} from '../../store/ducks/authentication/types';
 
 // Integrando State em Props
 const mapStateToProps = ({Authentication}: ApplicationState) => ({
@@ -48,10 +45,6 @@ export const SignInScreen = connect(
 
     const onFormSubmit = (values: SignInData): void => {
       props.loadRequest(values);
-    };
-
-    const navigateHome = (): void => {
-      props.navigation.navigate(AppRoute.HOME);
     };
 
     const navigateSignUp = (): void => {
@@ -105,6 +98,7 @@ export const SignInScreen = connect(
         />
         <Layout style={styles.formContainer}>
           <Formik
+            validateOnChange={false}
             initialValues={SignInData.empty()}
             validationSchema={SignInSchema}
             onSubmit={onFormSubmit}>

@@ -37,10 +37,6 @@ export const SignUpScreen = connect(
       props.registerRequest(values);
     };
 
-    const navigateHome = (): void => {
-      props.navigation.navigate(AppRoute.HOME);
-    };
-
     const navigateSignIn = (): void => {
       props.navigation.navigate(AppRoute.SIGN_IN);
     };
@@ -87,6 +83,7 @@ export const SignUpScreen = connect(
         </ImageBackground>
         <Layout style={styles.formContainer}>
           <Formik
+            validateOnChange={false}
             initialValues={SignUpData.empty()}
             validationSchema={SignUpSchema}
             onSubmit={onFormSubmit}>

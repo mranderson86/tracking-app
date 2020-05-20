@@ -11,6 +11,7 @@ import {FormInput} from '../../components/form-input.component';
 import {SignUpData, SignUpSchema} from '../../data/sign-up.model';
 
 import {RegisterTypes} from '../../store/ducks/register/types';
+import {SvgComponent} from '../../components/svg-background.components';
 
 import {connect} from 'react-redux';
 
@@ -96,6 +97,9 @@ export const SignUpScreen = connect(
             onPress={navigateSignIn}>
             Already have an account?
           </Button>
+          <View style={{flex: 1, margin: -20}}>
+            <SvgComponent />
+          </View>
         </Layout>
       </React.Fragment>
     );

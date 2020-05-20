@@ -12,6 +12,8 @@ import {connect} from 'react-redux';
 import {ApplicationState} from '../../store';
 import {LoginTypes} from '../../store/ducks/authentication/types';
 
+import {SvgComponent} from '../../components/svg-background.components';
+
 // Integrando State em Props
 const mapStateToProps = ({Authentication}: ApplicationState) => ({
   Authentication,
@@ -40,7 +42,7 @@ export const SignInScreen = connect(
     const [passwordVisible, setPasswordVisible] = React.useState<boolean>(
       false,
     );
-
+    console.log(props);
     const {Authentication} = props;
 
     const onFormSubmit = (values: SignInData): void => {
@@ -49,10 +51,6 @@ export const SignInScreen = connect(
 
     const navigateSignUp = (): void => {
       props.navigation.navigate(AppRoute.SIGN_UP);
-    };
-
-    const navigateResetPassword = (): void => {
-      props.navigation.navigate(AppRoute.RESET_PASSWORD);
     };
 
     const onPasswordIconPress = (): void => {
@@ -111,6 +109,9 @@ export const SignInScreen = connect(
             onPress={navigateSignUp}>
             Don't have an account?
           </Button>
+          <View style={{flex: 1, margin: -20}}>
+            <SvgComponent />
+          </View>
         </Layout>
       </React.Fragment>
     );
@@ -125,10 +126,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 16,
     paddingHorizontal: 16,
-  },
-  resetPasswordContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   formControl: {
     marginVertical: 4,

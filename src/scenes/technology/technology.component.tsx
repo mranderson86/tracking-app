@@ -26,6 +26,8 @@ import {DoneAllIcon} from '../../assets/icons';
 
 import {connect} from 'react-redux';
 
+import {SvgComponent} from '../../components/svg-background.components';
+
 // Integrando State em Props
 const mapStateToProps = ({Technology, Authentication}: ApplicationState) => ({
   Technology,
@@ -101,35 +103,37 @@ const TechnologyScreenComponent = connect(
     );
 
     return (
-      <Layout style={props.themedStyle.container}>
-        <Text
-          appearance="hint"
-          style={[props.themedStyle.title, props.themedStyle.item]}
-          category="h6">
-          Choose your technology below
-        </Text>
+      <React.Fragment>
+        <Layout style={props.themedStyle.container}>
+          <Text
+            appearance="hint"
+            style={[props.themedStyle.title, props.themedStyle.item]}
+            category="h6">
+            Choose your technology below
+          </Text>
 
-        {loading ? (
-          <View style={props.themedStyle.spinner}>
-            <Spinner />
-          </View>
-        ) : (
-          <React.Fragment>
-            <List
-              style={props.themedStyle.list}
-              data={technologies}
-              renderItem={renderTechnology}
-            />
-            {showRenderFab() && (
-              <Button
-                style={props.themedStyle.fab}
-                icon={DoneAllIcon}
-                onPress={() => props.technologySave(technologies, token)}
+          {loading ? (
+            <View style={props.themedStyle.spinner}>
+              <Spinner />
+            </View>
+          ) : (
+            <React.Fragment>
+              <List
+                style={props.themedStyle.list}
+                data={technologies}
+                renderItem={renderTechnology}
               />
-            )}
-          </React.Fragment>
-        )}
-      </Layout>
+              {showRenderFab() && (
+                <Button
+                  style={props.themedStyle.fab}
+                  icon={DoneAllIcon}
+                  onPress={() => props.technologySave(technologies, token)}
+                />
+              )}
+            </React.Fragment>
+          )}
+        </Layout>
+      </React.Fragment>
     );
   },
 );

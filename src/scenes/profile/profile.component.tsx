@@ -19,6 +19,8 @@ import {ProfileData, ProfileDataSchema} from '../../data/profile.model';
 import {RegisterTypes, Profile} from '../../store/ducks/register/types';
 import {ApplicationState} from '../../store';
 
+import {SvgComponent} from '../../components/svg-background.components';
+
 import {connect} from 'react-redux';
 
 const mapStateToProps = ({Authentication, Register}: ApplicationState) => ({
@@ -111,6 +113,9 @@ export const ProfileScreen = connect(
             onSubmit={onFormSubmit}>
             {renderForm}
           </Formik>
+          <View style={{flex: 1, margin: -20}}>
+            <SvgComponent />
+          </View>
         </Layout>
       </SafeAreaLayout>
     );

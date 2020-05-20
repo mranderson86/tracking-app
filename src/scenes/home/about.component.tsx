@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Divider, Layout, Text} from '@ui-kitten/components';
 import {AboutScreenProps} from '../../navigation/home.navigator';
 import {Toolbar} from '../../components/toolbar.component';
@@ -8,6 +8,8 @@ import {
   SafeAreaLayoutElement,
   SaveAreaInset,
 } from '../../components/safe-area-layout.component';
+
+import {SvgComponent} from '../../components/svg-background.components';
 
 export const AboutScreen = (props: AboutScreenProps): SafeAreaLayoutElement => (
   <SafeAreaLayout style={styles.safeArea} insets={SaveAreaInset.TOP}>
@@ -22,6 +24,9 @@ export const AboutScreen = (props: AboutScreenProps): SafeAreaLayoutElement => (
       <Text category="s1">Development by Anderson Gomes</Text>
       <Text category="s2">mr.anderson.brito@gmail.com</Text>
     </Layout>
+    <View style={{flex: 1, margin: -20}}>
+      <SvgComponent />
+    </View>
   </SafeAreaLayout>
 );
 

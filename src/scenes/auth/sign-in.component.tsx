@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {ReactFragment} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
 import {Button, Spinner, Layout, LayoutElement} from '@ui-kitten/components';
 import {Formik, FormikProps} from 'formik';
 import {SignInScreenProps} from '../../navigation/auth.navigator';
 import {AppRoute} from '../../navigation/app-routes';
 import {FormInput} from '../../components/form-input.component';
+import {ModalWithBackdrop} from '../../components/modal.component';
 import {EyeIcon, EyeOffIcon} from '../../assets/icons';
 import {SignInData, SignInSchema} from '../../data/sign-in.model';
 
@@ -25,6 +26,10 @@ const mapDispatchToProps = {
   loadRequest: (user: SignInData) => ({
     type: LoginTypes.LOGIN_REQUEST,
     payload: user,
+  }),
+
+  failureRequest: () => ({
+    type: LoginTypes.LOGIN_FAILURE_RESET,
   }),
 };
 /**
@@ -57,6 +62,31 @@ export const SignInScreen = connect(
       setPasswordVisible(!passwordVisible);
     };
 
+    const onFailureRequest = () => {
+      props.failureRequest();
+    };
+
+    const LoadingRender = () => (
+      <View style={styles.spinner}>
+        <Spinner />
+      </View>
+    );
+
+    const ErrorRender = () => (
+      <ModalWithBackdrop
+        title={'Erro'}
+        description={'Usuário e/ou Senha está incorreto'}
+        buttonTitle={'OK'}
+        onClose={onFailureRequest}
+      />
+    );
+
+    const SubmitRender = props => (
+      <Button style={styles.submitButton} onPress={props.handleSubmit}>
+        SIGN IN
+      </Button>
+    );
+
     const renderForm = (
       props: FormikProps<SignInData>,
     ): React.ReactFragment => (
@@ -75,18 +105,28 @@ export const SignInScreen = connect(
           icon={passwordVisible ? EyeIcon : EyeOffIcon}
           onIconPress={onPasswordIconPress}
         />
+        {!Authentication.loading && <SubmitRender {...props} />}
+        {Authentication.loading && <LoadingRender />}
+        {Authentication.error && <ErrorRender />}
 
-        {Authentication.loading ? (
+        {/* {Authentication.loading ? (
           <View style={styles.spinner}>
             <Spinner />
           </View>
         ) : (
-          <Button style={styles.submitButton} onPress={props.handleSubmit}>
-            SIGN IN
-          </Button>
-        )}
+          Authentication.error && (
+            <ModalWithBackdrop
+              title={'Erro'}
+              description={'Usuário e/ou Senha está incorreto'}
+              buttonTitle={'OK'}
+              onClose={onFailureRequest}
+            />
+          )
+        )} */}
       </React.Fragment>
     );
+
+    console.log(Authentication.error);
 
     return (
       <React.Fragment>

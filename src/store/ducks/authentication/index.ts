@@ -28,7 +28,7 @@ const reducer: Reducer<AuthenticationState> = (
         error: false,
         token,
       };
-    case LoginTypes.LOGIN_FAILURE:
+    case LoginTypes.LOGIN_FAILURE: {
       return {
         ...state,
         isLogged: false,
@@ -36,6 +36,7 @@ const reducer: Reducer<AuthenticationState> = (
         error: true,
         token: '',
       };
+    }
     case LogoutTypes.LOGOUT_REQUEST:
       return {
         ...state,
@@ -44,6 +45,13 @@ const reducer: Reducer<AuthenticationState> = (
         error: false,
         token: '',
       };
+
+    case LoginTypes.LOGIN_FAILURE_RESET:
+      return {
+        ...state,
+        error: false,
+      };
+
     default:
       return state;
   }

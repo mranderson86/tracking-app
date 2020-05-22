@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {networkInterfaces} from 'os';
 
 // integração com a api rest
 const api = axios.create({

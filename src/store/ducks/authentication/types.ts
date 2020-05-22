@@ -5,6 +5,7 @@ export enum LoginTypes {
   LOGIN_REQUEST = '@authentication/LOGIN_REQUEST',
   LOGIN_SUCCESS = '@authentication/LOGIN_SUCCESS',
   LOGIN_FAILURE = '@authentication/LOGIN_FAILURE',
+  LOGIN_FAILURE_RESET = '@authentication/LOGIN_FAILURE_RESET',
 }
 
 export enum LogoutTypes {

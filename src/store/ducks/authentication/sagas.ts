@@ -22,6 +22,8 @@ function* loginRequestAsync({payload}: any) {
     // Atualiza o token
     yield put(loginSuccess(token));
   } catch (error) {
+    console.log(error);
+
     yield put(loginFailure());
   }
 }

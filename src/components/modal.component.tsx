@@ -9,6 +9,16 @@ interface ModalInformation {
   onClose: () => void;
 }
 
+const Footer = props => (
+  <Button
+    {...props}
+    status="warning"
+    style={styles.button}
+    onPress={props.onCloseModal}>
+    {props.buttonTitle}
+  </Button>
+);
+
 export const ModalWithBackdrop = (
   props: ModalInformation,
 ): React.ReactElement => {
@@ -16,8 +26,11 @@ export const ModalWithBackdrop = (
 
   const {title, description, buttonTitle, onClose} = props;
 
-  const Header = () => <Text category="h6">{title}</Text>;
-  const Footer = () => <Button onPress={onCloseModal}>{buttonTitle}</Button>;
+  const Header = props => (
+    <Text {...props} category="h6">
+      {title}
+    </Text>
+  );
 
   const onCloseModal = (): void => {
     setVisible(false);
@@ -29,7 +42,10 @@ export const ModalWithBackdrop = (
       style={styles.container}
       visible={visible}
       backdropStyle={styles.backdrop}>
-      <Card header={Header} footer={Footer}>
+      <Card
+        header={Header}
+        footer={() => <Footer {...props} onCloseModal={onCloseModal} />}
+        status="warning">
         <Text category="s1">{description}</Text>
       </Card>
     </Modal>
@@ -39,8 +55,14 @@ export const ModalWithBackdrop = (
 const styles = StyleSheet.create({
   container: {
     // minHeight: 192,
+    // flex: 1,
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  button: {
+    width: '80%',
+    alignSelf: 'center',
+    margin: '5%',
   },
 });

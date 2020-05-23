@@ -47,7 +47,7 @@ export const SignInScreen = connect(
     const [passwordVisible, setPasswordVisible] = React.useState<boolean>(
       false,
     );
-    console.log(props);
+
     const {Authentication} = props;
 
     const onFormSubmit = (values: SignInData): void => {
@@ -75,7 +75,7 @@ export const SignInScreen = connect(
     const ErrorRender = () => (
       <ModalWithBackdrop
         title={'Erro'}
-        description={'Usuário e/ou Senha está incorreto'}
+        description={'Usuário e/ou Senha está incorreto!'}
         buttonTitle={'OK'}
         onClose={onFailureRequest}
       />
@@ -126,7 +126,7 @@ export const SignInScreen = connect(
       </React.Fragment>
     );
 
-    console.log(Authentication.error);
+    // console.log(Authentication.error);
 
     return (
       <React.Fragment>

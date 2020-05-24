@@ -2,6 +2,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import * as eva from '@eva-design/eva';
+import {mapping} from '@eva-design/eva';
 import {ApplicationProvider, IconRegistry} from '@ui-kitten/components';
 import {EvaIconsPack} from '@ui-kitten/eva-icons';
 
@@ -18,7 +19,10 @@ export default (): React.ReactFragment => {
     <React.Fragment>
       <ReduxProvider store={store}>
         <IconRegistry icons={EvaIconsPack} />
-        <ApplicationProvider {...eva} theme={{...eva.light, ...theme}}>
+        <ApplicationProvider
+          {...eva}
+          mapping={mapping}
+          theme={{...eva.light, ...theme}}>
           <SafeAreaProvider>
             <NavigationContainer>
               <AppRedux />

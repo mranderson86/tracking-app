@@ -24,7 +24,12 @@ export const TechnologyTabBar = (props): SafeAreaLayoutElement => {
   const createNavigationTabForRoute = (route): TabElement => {
     const {options} = props.descriptors[route.key];
     return (
-      <Tab key={route.key} title={options.title} icon={options.tabBarIcon} />
+      <Tab
+        {...props}
+        key={route.key}
+        title={options.title}
+        icon={options.tabBarIcon}
+      />
     );
   };
 

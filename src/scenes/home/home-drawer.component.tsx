@@ -1,5 +1,10 @@
 import React from 'react';
-import {Drawer, DrawerElement, MenuItemType} from '@ui-kitten/components';
+import {
+  Drawer,
+  DrawerElement,
+  DrawerItem,
+  IndexPath,
+} from '@ui-kitten/components';
 import {
   SafeAreaLayout,
   SaveAreaInset,
@@ -12,23 +17,22 @@ export const HomeDrawer = (props): DrawerElement => {
     props.navigation.closeDrawer();
   };
 
-  const createNavigationItemForRoute = (
-    route,
-  ): MenuItemType & {routeName: string} => {
+  const createNavigationItemForRoute = route => {
     const {options} = props.descriptors[route.key];
-    return {
-      routeName: route.name,
-      title: options.title,
-      icon: options.drawerIcon,
-    };
+    return (
+      <DrawerItem
+        key={route.key}
+        title={options.title}
+        accessoryLeft={options.drawerIcon}
+      />
+    );
   };
 
   return (
     <SafeAreaLayout insets={SaveAreaInset.TOP}>
-      <Drawer
-        data={props.state.routes.map(createNavigationItemForRoute)}
-        onSelect={onMenuItemSelect}
-      />
+      <Drawer onSelect={(index: IndexPath) => onMenuItemSelect(index.row)}>
+        {props.state.routes.map(createNavigationItemForRoute)}
+      </Drawer>
     </SafeAreaLayout>
   );
 };

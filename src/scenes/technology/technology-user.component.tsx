@@ -63,6 +63,8 @@ const TechnologyUserScreenComponent = connect(
     const {technologies} = props.Technology;
     const {token} = props.Authentication;
 
+    const {eva} = props;
+
     React.useEffect(() => {
       // Consulta todas as tecnologias
       props.technologiesUserRequest(token);
@@ -75,7 +77,7 @@ const TechnologyUserScreenComponent = connect(
     const renderTechnology = ({
       item,
     }: ListRenderItemInfo<Technology>): ListItemElement => (
-      <ListItem icon={CodeOutlineIcon} style={props.themedStyle.item}>
+      <ListItem style={props.eva?.style?.item}>
         <Text appearance="hint" category="s2">
           {item.technology}
         </Text>
@@ -90,13 +92,13 @@ const TechnologyUserScreenComponent = connect(
       item,
     }: ListRenderItemInfo<TechnologiesUser>): ListItemElement => (
       <React.Fragment>
-        <ListItem icon={PeopleOutlineIcon} style={props.themedStyle.item}>
+        <ListItem style={props.eva?.style?.item}>
           <Text category="h6">{item.username}</Text>
           <Text appearance="hint" category="s1">
             {item.technologies.length.toString()} Technologies
           </Text>
           <List
-            style={props.themedStyle.list}
+            style={props.eva?.style?.list}
             data={item.technologies}
             renderItem={renderTechnology}
           />
@@ -106,15 +108,15 @@ const TechnologyUserScreenComponent = connect(
     );
 
     return (
-      <Layout style={props.themedStyle.container}>
+      <Layout style={props.eva?.style?.container}>
         <Text
           appearance="hint"
-          style={[props.themedStyle.title, props.themedStyle.item]}
+          style={[props.eva?.style?.title, props.eva?.style?.item]}
           category="h5">
           Technologies x User
         </Text>
         <List
-          style={props.themedStyle.list}
+          style={props.eva?.style?.list}
           data={technologiesUser}
           renderItem={renderUser}
         />

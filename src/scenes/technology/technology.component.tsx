@@ -90,9 +90,9 @@ const TechnologyScreenComponent = connect(
     const renderTechnology = ({
       item,
     }: ListRenderItemInfo<Technology>): ListItemElement => (
-      <ListItem style={props.themedStyle.item} disabled>
+      <ListItem style={props.eva?.style?.item} disabled>
         <CheckBox
-          style={props.themedStyle.checkbox}
+          style={props.eva?.style?.checkbox}
           checked={item.checked}
           onChange={(checked: boolean) =>
             props.technologyChecked({...item, checked})
@@ -104,29 +104,29 @@ const TechnologyScreenComponent = connect(
 
     return (
       <React.Fragment>
-        <Layout style={props.themedStyle.container}>
+        <Layout style={props.eva?.style?.container}>
           <Text
             appearance="hint"
-            style={[props.themedStyle.title, props.themedStyle.item]}
+            style={[props.eva?.style?.title, props.eva?.style?.item]}
             category="h6">
             Choose your technology below
           </Text>
 
           {loading ? (
-            <View style={props.themedStyle.spinner}>
+            <View style={props.eva?.style?.spinner}>
               <Spinner />
             </View>
           ) : (
             <React.Fragment>
               <List
-                style={props.themedStyle.list}
+                style={props.eva?.style?.list}
                 data={technologies}
                 renderItem={renderTechnology}
               />
               {showRenderFab() && (
                 <Button
-                  style={props.themedStyle.fab}
-                  icon={DoneAllIcon}
+                  style={props.eva?.style?.fab}
+                  accessoryLeft={DoneAllIcon}
                   onPress={() => props.technologySave(technologies, token)}
                 />
               )}

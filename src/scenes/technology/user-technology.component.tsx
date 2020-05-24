@@ -73,7 +73,7 @@ const UserTechnologyScreenComponent = connect(
      * @param item
      */
     const renderUser = ({item}: ListRenderItemInfo<User>): ListItemElement => (
-      <ListItem icon={PersonIcon} style={props.themedStyle.item} disabled>
+      <ListItem style={props.eva?.style?.item} disabled>
         <Text category="h6">{item.username}</Text>
         <Text appearance="hint" category="s1">
           {item.email}
@@ -90,15 +90,14 @@ const UserTechnologyScreenComponent = connect(
     }: ListRenderItemInfo<UsersTechnology>): ListItemElement => (
       <React.Fragment>
         <ListItem
-          icon={CodeOutlineIcon}
-          style={props.themedStyle.item}
+          style={props.eva?.style?.item}
           disabled>
           <Text category="h6">{item.technology}</Text>
           <Text appearance="hint" category="s1">
             {item.users.length.toString()} Users
           </Text>
           <List
-            style={props.themedStyle.list}
+            style={props.eva?.style?.list}
             data={item.users}
             renderItem={renderUser}
           />
@@ -108,15 +107,15 @@ const UserTechnologyScreenComponent = connect(
     );
 
     return (
-      <Layout style={props.themedStyle.container}>
+      <Layout style={props.eva?.style?.container}>
         <Text
           appearance="hint"
-          style={[props.themedStyle.title, props.themedStyle.item]}
+          style={[props.eva?.style?.title, props.eva?.style?.item]}
           category="h5">
           Users x Technology
         </Text>
         <List
-          style={props.themedStyle.list}
+          style={props.eva?.style?.list}
           data={usersTechnology}
           renderItem={renderTechnology}
         />

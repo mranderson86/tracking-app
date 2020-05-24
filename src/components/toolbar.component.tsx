@@ -1,29 +1,38 @@
 import React from 'react';
-import { ImageProps } from 'react-native';
+import {ImageProps} from 'react-native';
 import {
   OverflowMenu,
-  OverflowMenuItemType,
   StyleType,
   TopNavigation,
   TopNavigationAction,
   TopNavigationActionElement,
   TopNavigationProps,
+  IndexPath,
+  IconElement,
 } from '@ui-kitten/components';
-import { BackIcon, MoreVerticalIcon } from '../assets/icons';
+import {BackIcon, MenuIcon, MoreVerticalIcon} from '../assets/icons';
 
-export type ToolbarMenu = OverflowMenuItemType[];
+export type ToolbarMenu = [];
 
 export interface ToolbarProps extends TopNavigationProps {
   menu?: ToolbarMenu;
-  backIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
-  menuIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
+  // backIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
+  // menuIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
+  backIcon?: (style) => IconElement;
+  menuIcon?: (style) => IconElement;
   onMenuItemSelect?: (index: number) => void;
   onBackPress?: () => void;
 }
 
 export const Toolbar = (props: ToolbarProps): TopNavigationActionElement => {
-
-  const { menu, backIcon, menuIcon, onMenuItemSelect, onBackPress, ...topNavigationProps } = props;
+  const {
+    menu,
+    backIcon,
+    menuIcon,
+    onMenuItemSelect,
+    onBackPress,
+    ...topNavigationProps
+  } = props;
   const [menuVisible, setMenuVisible] = React.useState(false);
 
   const onMenuSelect = (index: number) => {
@@ -35,12 +44,12 @@ export const Toolbar = (props: ToolbarProps): TopNavigationActionElement => {
     setMenuVisible(!menuVisible);
   };
 
-  const renderMenuAction = (menu: OverflowMenuItemType[]): TopNavigationActionElement => (
+  const renderMenuAction = (): TopNavigationActionElement => (
     <OverflowMenu
+      anchor={() => <React.Fragment />}
       visible={menuVisible}
-      data={menu}
-      placement='bottom end'
-      onSelect={onMenuSelect}
+      placement="bottom end"
+      onSelect={(index: IndexPath) => onMenuSelect(index.row)}
       onBackdropPress={onMenuActionPress}>
       <TopNavigationAction
         icon={props.menuIcon || MoreVerticalIcon}
@@ -60,9 +69,9 @@ export const Toolbar = (props: ToolbarProps): TopNavigationActionElement => {
     <React.Fragment>
       <TopNavigation
         {...topNavigationProps}
-        alignment='center'
-        leftControl={onBackPress && renderBackAction()}
-        rightControls={menu && renderMenuAction(menu)}
+        alignment="center"
+        accessoryLeft={onBackPress && renderBackAction}
+        accessoryRight={menu && renderMenuAction}
       />
     </React.Fragment>
   );

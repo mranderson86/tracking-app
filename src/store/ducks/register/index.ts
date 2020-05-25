@@ -34,6 +34,8 @@ const reducer: Reducer<ProfileState> = (state = INITIAL_STATE, action) => {
       };
     case RegisterTypes.PROFILE_UPDATE:
       return {...state, loading: true, error: false};
+    case RegisterTypes.REGISTER_FAILURE_RESET:
+      return {...state, error: false};
     default:
       return state;
   }

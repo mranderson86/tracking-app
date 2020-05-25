@@ -9,22 +9,22 @@ interface ModalInformation {
   onClose: () => void;
 }
 
-const Footer = props => (
-  <Button
-    {...props}
-    status="warning"
-    style={styles.button}
-    onPress={props.onCloseModal}>
-    {props.buttonTitle}
-  </Button>
-);
-
 export const ModalWithBackdrop = (
   props: ModalInformation,
 ): React.ReactElement => {
   const [visible, setVisible] = React.useState(true);
 
   const {title, description, buttonTitle, onClose} = props;
+
+  const Footer = props => (
+    <Button
+      {...props}
+      status="warning"
+      style={styles.button}
+      onPress={onCloseModal}>
+      {buttonTitle}
+    </Button>
+  );
 
   const Header = props => (
     <Text {...props} category="h6">
@@ -55,7 +55,7 @@ export const ModalWithBackdrop = (
 const styles = StyleSheet.create({
   container: {
     // minHeight: 192,
-    // flex: 1,
+    width: '80%',
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -63,6 +63,6 @@ const styles = StyleSheet.create({
   button: {
     width: '80%',
     alignSelf: 'center',
-    margin: '5%',
+    margin: '2%',
   },
 });

@@ -12,23 +12,34 @@ import {SignUpData, SignUpSchema} from '../../data/sign-up.model';
 
 import {RegisterTypes} from '../../store/ducks/register/types';
 import {SvgComponent} from '../../components/svg-background.components';
+import {ModalWithBackdrop} from '../../components/modal.component';
+
+import {ApplicationState} from '../../store';
 
 import {connect} from 'react-redux';
+
+const mapStateToProps = ({Register}: ApplicationState) => ({Register});
+
+type StateProps = ReturnType<typeof mapStateToProps>;
 
 const mapDispatchToProps = {
   registerRequest: (register: SignUpData) => ({
     type: RegisterTypes.REGISTER_REQUEST,
     payload: register,
   }),
+
+  registerFailure: () => ({
+    type: RegisterTypes.REGISTER_FAILURE_RESET,
+  }),
 };
 
 // Redux Action Register Request
 type DispatchProps = typeof mapDispatchToProps;
 
-type Props = SignUpScreenProps & DispatchProps;
+type Props = StateProps & SignUpScreenProps & DispatchProps;
 
 export const SignUpScreen = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(
   (props: Props): LayoutElement => {
@@ -41,6 +52,31 @@ export const SignUpScreen = connect(
     const navigateSignIn = (): void => {
       props.navigation.navigate(AppRoute.SIGN_IN);
     };
+
+    const {Register} = props;
+
+    console.log(props.Register);
+
+    const ErrorRender = () => (
+      <ModalWithBackdrop
+        title={'Erro'}
+        description={'Failure in to register!'}
+        buttonTitle={'OK'}
+        onClose={props.registerFailure}
+      />
+    );
+
+    const LoadingRender = () => (
+      <View style={styles.spinner}>
+        <Spinner />
+      </View>
+    );
+
+    const SubmitRender = props => (
+      <Button style={styles.submitButton} onPress={props.handleSubmit}>
+        SIGN UP
+      </Button>
+    );
 
     const renderForm = (
       props: FormikProps<SignUpData>,
@@ -63,7 +99,11 @@ export const SignUpScreen = connect(
           placeholder="Username"
         />
 
-        {props.isSubmitting ? (
+        {!Register.loading && <SubmitRender {...props} />}
+        {Register.loading && <LoadingRender />}
+        {Register.error && <ErrorRender />}
+
+        {/* {props.isSubmitting ? (
           <View style={styles.spinner}>
             <Spinner />
           </View>
@@ -71,7 +111,7 @@ export const SignUpScreen = connect(
           <Button style={styles.submitButton} onPress={props.handleSubmit}>
             SIGN UP
           </Button>
-        )}
+        )} */}
       </React.Fragment>
     );
 
@@ -127,5 +167,6 @@ const styles = StyleSheet.create({
   spinner: {
     alignSelf: 'center',
     marginVertical: 24,
+    height: '10%',
   },
 });

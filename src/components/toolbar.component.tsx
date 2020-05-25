@@ -16,8 +16,6 @@ export type ToolbarMenu = [];
 
 export interface ToolbarProps extends TopNavigationProps {
   menu?: ToolbarMenu;
-  // backIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
-  // menuIcon?: (style: StyleType) => React.ReactElement<ImageProps>;
   backIcon?: (style) => IconElement;
   menuIcon?: (style) => IconElement;
   onMenuItemSelect?: (index: number) => void;

@@ -1,5 +1,10 @@
 import React, {ReactFragment} from 'react';
-import {ImageBackground, StyleSheet, View} from 'react-native';
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {Button, Spinner, Layout, LayoutElement} from '@ui-kitten/components';
 import {Formik, FormikProps} from 'formik';
 import {SignInScreenProps} from '../../navigation/auth.navigator';
@@ -75,7 +80,7 @@ export const SignInScreen = connect(
     const ErrorRender = () => (
       <ModalWithBackdrop
         title={'Erro'}
-        description={'Usuário e/ou Senha está incorreto!'}
+        description={'User e/or Password is wrong!'}
         buttonTitle={'OK'}
         onClose={onFailureRequest}
       />
@@ -85,6 +90,13 @@ export const SignInScreen = connect(
       <Button style={styles.submitButton} onPress={props.handleSubmit}>
         SIGN IN
       </Button>
+    );
+
+    const renderPassword = props => (
+      <TouchableWithoutFeedback onPress={onPasswordIconPress}>
+        {// <Icon {...props} name={passwordVisible ? 'eye-off' : 'eye-off'} />
+        passwordVisible ? <EyeIcon {...props} /> : <EyeOffIcon {...props} />}
+      </TouchableWithoutFeedback>
     );
 
     const renderForm = (
@@ -102,31 +114,13 @@ export const SignInScreen = connect(
           style={styles.formControl}
           placeholder="Password"
           secureTextEntry={!passwordVisible}
-          icon={passwordVisible ? EyeIcon : EyeOffIcon}
-          onIconPress={onPasswordIconPress}
+          accessoryRight={renderPassword}
         />
         {!Authentication.loading && <SubmitRender {...props} />}
         {Authentication.loading && <LoadingRender />}
         {Authentication.error && <ErrorRender />}
-
-        {/* {Authentication.loading ? (
-          <View style={styles.spinner}>
-            <Spinner />
-          </View>
-        ) : (
-          Authentication.error && (
-            <ModalWithBackdrop
-              title={'Erro'}
-              description={'Usuário e/ou Senha está incorreto'}
-              buttonTitle={'OK'}
-              onClose={onFailureRequest}
-            />
-          )
-        )} */}
       </React.Fragment>
     );
-
-    // console.log(Authentication.error);
 
     return (
       <React.Fragment>
@@ -179,6 +173,6 @@ const styles = StyleSheet.create({
   spinner: {
     alignSelf: 'center',
     marginVertical: 24,
-    height: 42,
+    height: '10%',
   },
 });

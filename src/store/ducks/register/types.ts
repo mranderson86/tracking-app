@@ -7,6 +7,7 @@ export enum RegisterTypes {
   REGISTER_REQUEST = '@register/REQUEST',
   REGISTER_SUCCESS = '@register/SUCCESS',
   REGISTER_FAILURE = '@register/FAILURE',
+  REGISTER_FAILURE_RESET = '@register/FAILURE_RESET',
   PROFILE_REQUEST = '@profile/REQUEST',
   PROFILE_UPDATE = '@profile/UPDATE',
 }

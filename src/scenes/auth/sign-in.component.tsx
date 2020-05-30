@@ -125,8 +125,9 @@ export const SignInScreen = connect(
     return (
       <React.Fragment>
         <ImageBackground
+          {...props}
           style={styles.appBar}
-          source={require('../../assets/image_welcome.png')}
+          source={require('../../assets/1024x1024.png')}
         />
         <Layout style={styles.formContainer}>
           <Formik
@@ -155,6 +156,7 @@ export const SignInScreen = connect(
 const styles = StyleSheet.create({
   appBar: {
     height: 192,
+    backgroundColor: '#FFF',
   },
   formContainer: {
     flex: 1,

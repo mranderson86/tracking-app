@@ -10,10 +10,10 @@
 2. Desenvolvido utilizando tecnologias como [React.js](https://pt-br.reactjs.org/), [React Native](https://reactnative.dev/), [UI-Kitten](https://akveo.github.io/react-native-ui-kitten/) e [Expo](https://expo.io/)
 3. Tela Desenvolvidas:
 
-![DrawerScreen](assets/DrawerScreen.png)
-![LoginScreen](assets/LoginScreen.png)
-![ProfileScreen](assets/ProfileScreen.png)
-![RegisterScreen](assets/RegisterScreen.png)
-![TechnologiesScreen](assets/TechnologiesScreen.png)
-![TechnologyScreen](assets/TechnologyScreen.png)
+![DrawerScreen](assets/DrawerScreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
+![LoginScreen](assets/LoginScreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
+![ProfileScreen](assets/ProfileScreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
+![RegisterScreen](assets/RegisterScreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
+![TechnologiesScreen](assets/TechnologiesScreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
+![TechnologyScreen](assets/TechnologyScreen.png)&nbsp;&nbsp;&nbsp;&nbsp;
 ![UsersScreen](assets/UsersScreen.png)
